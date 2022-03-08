@@ -1,10 +1,10 @@
-import Navbar from "./navbar";
+import Header from "./header";
 
 // Shared layout between multiple pages:
 export default function Layout({ children }) {
 	return (
 		<>
-			<Navbar />
+			<Header />
 			<main>{children}</main>
 		</>
 	);

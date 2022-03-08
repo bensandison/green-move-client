@@ -1,3 +1,4 @@
+import { Container } from "@chakra-ui/react";
 import Head from "next/head";
 
 export default function Home() {
@@ -9,9 +10,9 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<main>
+			<Container h="200vh">
 				<h1>Hello...</h1>
-			</main>
+			</Container>
 		</div>
 	);
 }
