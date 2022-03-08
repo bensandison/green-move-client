@@ -1,11 +1,11 @@
+import Layout from "../components/layouts";
+
+// Wraps all pages in <Layout>
 function MyApp({ Component, pageProps }) {
 	return (
-		<>
-			<nav>
-				<h1>nav here</h1>
-			</nav>
+		<Layout>
 			<Component {...pageProps} />
-		</>
+		</Layout>
 	);
 }
 
