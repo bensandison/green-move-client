@@ -1,11 +1,14 @@
 import Header from "./header";
+import { Container } from "@chakra-ui/react";
 
 // Shared layout between multiple pages:
 export default function Layout({ children }) {
 	return (
 		<>
 			<Header />
-			<main>{children}</main>
+			<Container as="main" maxW="container.lg">
+				{children}
+			</Container>
 		</>
 	);
 }
