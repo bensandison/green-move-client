@@ -1,10 +1,17 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Container, HStack, Text } from "@chakra-ui/react";
+import Image from "next/image";
+import leafLogoSVG from "../public/leaf-logo.svg";
+
+const navItemStylesHover = {
+	bgColor: "white",
+	color: "teal.500",
+	cursor: "pointer",
+};
 
 export default function Header() {
 	return (
 		<Box
 			as="header"
-			h={16}
 			bgColor="teal.500"
 			sx={{
 				position: "-webkit-sticky",
@@ -12,37 +19,30 @@ export default function Header() {
 				top: "0",
 			}}
 		>
-			<Flex
-				as="nav"
-				mx={3}
-				flexDir="row"
-				justify="flex-start"
-				align="center"
-				color="white"
-				h="100%"
-				textAlign="center"
-				fontWeight="bold"
-			>
-				<NavItem>Item1</NavItem>
-				<NavItem>Item2</NavItem>
-			</Flex>
+			<Container maxW="container.xl" height="100%">
+				<HStack
+					as="nav"
+					gap={4}
+					mx={3}
+					py={2}
+					justify="flex-start"
+					align="center"
+					color="white"
+					h="100%"
+					textAlign="center"
+					fontWeight="bold"
+				>
+					<HStack _hover={navItemStylesHover} align="center" borderRadius="xl">
+						<Image
+							src={leafLogoSVG}
+							alt="leaf-logo"
+							width={40}
+							height={40}
+						></Image>
+						<Text>GreenMove.</Text>
+					</HStack>
+				</HStack>
+			</Container>
 		</Box>
-	);
-}
-
-function NavItem({ children }) {
-	return (
-		<Text
-			p={3}
-			m={1}
-			borderRadius="xl"
-			_hover={{
-				bgColor: "white",
-				color: "teal.500",
-				cursor: "pointer",
-			}}
-		>
-			{children}
-		</Text>
 	);
 }
