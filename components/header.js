@@ -17,6 +17,7 @@ export default function Header() {
 				position: "-webkit-sticky",
 				position: "sticky",
 				top: "0",
+				zIndex: "99",
 			}}
 		>
 			<Container maxW="container.xl" height="100%">
