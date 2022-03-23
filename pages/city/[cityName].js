@@ -49,7 +49,7 @@ export default function CityData() {
 			<Text fontWeight="semibold" fontSize="lg">
 				Detailed Information
 			</Text>
-			<SimpleGrid my="2" columns={[2, 2, 4]} spacing={4}>
+			<SimpleGrid my="2" columns={[2, 3, 4]} spacing={4}>
 				<InfoCard title="Air Quality" value={cityData.air_quality}></InfoCard>
 				<InfoCard title="Population" value={cityData.pop}></InfoCard>
 				{/* Some random dummy data... */}
