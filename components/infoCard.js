@@ -1,13 +1,13 @@
 import { Box, Text } from "@chakra-ui/react";
 
-export default function InfoCard() {
+export default function InfoCard({ title, value }) {
 	return (
 		<Box borderWidth={2} borderRadius="md" p={3}>
 			<Text fontSize="lg" fontWeight="semibold">
-				Green Space:
+				{title}
 			</Text>
 			<Text fontSize="3xl" fontWeight="semibold">
-				54%
+				{value}
 			</Text>
 		</Box>
 	);

@@ -17,22 +17,20 @@ export default function CityData() {
 		getData();
 	}, [router.isReady]);
 
-	function getData() {
-		// TODO: Call api...
+	async function getData() {
+		const { cityName } = await router.query;
 
-		const { cityName } = router.query;
-		setCityData({
-			name: cityName,
-			mainScore: 4.5,
-			greenSpace: 34,
-			waterQuality: 67,
-			airQuality: 82,
-			numberOfParks: 34,
-		});
+		const res = await fetch(
+			`https://greenmove-api.herokuapp.com/city/searchCities?name=${cityName}`
+		);
+		let data = await res.json();
+		data = data.data;
+		setCityData(data);
 	}
 
 	// If no city data:
 	if (!cityData) return <p>loading...</p>;
+	if (cityData) console.log(cityData);
 	return (
 		<Flex maxW="container.md" direction="column" py={4}>
 			<SearchBar value={cityData.name}></SearchBar>
@@ -46,17 +44,18 @@ export default function CityData() {
 				Overall Rating
 			</Text>
 			<Text fontWeight="semibold" fontSize="7xl" mt={-5}>
-				4.7
+				{cityData.rating}
 			</Text>
 			<Text fontWeight="semibold" fontSize="lg">
 				Detailed Information
 			</Text>
 			<SimpleGrid my="2" columns={4} spacing={4}>
-				<InfoCard></InfoCard>
-				<InfoCard></InfoCard>
-				<InfoCard></InfoCard>
-				<InfoCard></InfoCard>
-				<InfoCard></InfoCard>
+				<InfoCard title="Air Quality" value={cityData.air_quality}></InfoCard>
+				<InfoCard title="Population" value={cityData.pop}></InfoCard>
+				{/* Some random dummy data... */}
+				<InfoCard title="Green Space" value="25%"></InfoCard>
+				<InfoCard title="Number Of Parks" value="11"></InfoCard>
+				<InfoCard title="Water Quality" value="67%"></InfoCard>
 			</SimpleGrid>
 		</Flex>
 	);

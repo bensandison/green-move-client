@@ -7,7 +7,7 @@ export default function SearchBar(props) {
 			<InputRightElement pointerEvents="none">
 				<SearchIcon />
 			</InputRightElement>
-			<Input type="" placeholder="City Name" value={props.value} />
+			<Input type="" placeholder="City Name" defaultValue={props.value} />
 		</InputGroup>
 	);
 }
