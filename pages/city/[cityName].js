@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Flex, AspectRatio, Text, SimpleGrid } from "@chakra-ui/react";
+import { Flex, AspectRatio, Text, SimpleGrid, Box } from "@chakra-ui/react";
 import InfoCard from "../../components/infoCard";
 import SearchBar from "../../components/searchBar";
 
@@ -42,6 +42,12 @@ export default function CityData() {
 					alt="demo"
 				/>
 			</AspectRatio>
+			<Text fontWeight="semibold" fontSize="lg">
+				Overall Rating
+			</Text>
+			<Text fontWeight="semibold" fontSize="7xl" mt={-5}>
+				4.7
+			</Text>
 			<Text fontWeight="semibold" fontSize="lg">
 				Detailed Information
 			</Text>
