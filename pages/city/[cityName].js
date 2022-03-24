@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Flex, AspectRatio, Text, SimpleGrid, Box } from "@chakra-ui/react";
 import InfoCard from "../../components/infoCard";
 import SearchBar from "../../components/searchBar";
+import MultiLeafScore from "../../components/multiLeafScore";
 
 export default function CityData() {
 	const [cityData, setCityData] = useState();
@@ -45,6 +46,7 @@ export default function CityData() {
 			<Text fontWeight="semibold" fontSize="7xl" mt={-5}>
 				{cityData.rating}
 			</Text>
+			<MultiLeafScore></MultiLeafScore>
 			<Text fontWeight="semibold" fontSize="lg">
 				Detailed Information
 			</Text>
