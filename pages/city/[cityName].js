@@ -21,7 +21,7 @@ export default function CityData() {
 		const { cityName } = await router.query;
 
 		const res = await fetch(
-			`https://greenmove-api.herokuapp.com/city/search?name=${cityName}`
+			`https://api.greenmove.tk/city/search?name=${cityName}`
 		);
 		let data = await res.json();
 		data = data.data;
