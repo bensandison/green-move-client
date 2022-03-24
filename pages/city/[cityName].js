@@ -31,7 +31,7 @@ export default function CityData() {
 		const { cityName } = await router.query;
 
 		const res = await fetch(
-			`https://greenmove-api.herokuapp.com/city/searchCities?name=${cityName}`
+			`https://greenmove-api.herokuapp.com/city/search?name=${cityName}`
 		);
 		let data = await res.json();
 		data = data.data;
@@ -40,7 +40,6 @@ export default function CityData() {
 
 	// If no city data:
 	if (!cityData) return <p>loading...</p>;
-	if (cityData) console.log(cityData);
 	return (
 		<Flex maxW="container.md" direction="column" py={4} m="auto">
 			<SearchBar value={cityData.name}></SearchBar>
