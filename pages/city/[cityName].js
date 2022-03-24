@@ -30,7 +30,6 @@ export default function CityData() {
 
 	// If no city data:
 	if (!cityData) return <p>loading...</p>;
-	if (cityData) console.log(cityData);
 	return (
 		<Flex maxW="container.md" direction="column" py={4} m="auto">
 			<SearchBar value={cityData.name}></SearchBar>
