@@ -4,6 +4,16 @@ import { useEffect, useState } from "react";
 import { Flex, AspectRatio, Text, SimpleGrid, Box } from "@chakra-ui/react";
 import InfoCard from "../../components/infoCard";
 import SearchBar from "../../components/searchBar";
+import {
+	InputGroup,
+	InputRightElement,
+	Input,
+	Stack,
+	Container,
+} from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
+import Mapbox from '../../components/map'
+
 
 export default function CityData() {
 	const [cityData, setCityData] = useState();
