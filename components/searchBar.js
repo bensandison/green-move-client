@@ -13,10 +13,9 @@ export default function SearchBar(props) {
 	const [searchQuery, setSearchQuery] = useState("");
 
 	function handleSearchSubmit(e) {
-		e.preventDefault();
-
 		// Check search bar has text inside
 		if (searchQuery.replace(/\s/g, "") !== "") {
+			// Send user to route of new city:
 			Router.push(`/city/${searchQuery}`);
 		}
 	}
@@ -30,7 +29,11 @@ export default function SearchBar(props) {
 				onChange={(e) => setSearchQuery(e.target.value)}
 			/>
 			<InputRightElement>
-				<IconButton icon={<SearchIcon />} type="submit"></IconButton>
+				<IconButton
+					variant="ghost"
+					icon={<SearchIcon />}
+					type="submit"
+				></IconButton>
 			</InputRightElement>
 		</InputGroup>
 	);
