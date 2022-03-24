@@ -2,6 +2,7 @@
 import 'mapbox-gl'
 import mapboxgl from '!mapbox-gl'
 import React, { useRef, useState, useEffect } from "react"
+import { Box } from '@chakra-ui/react'
 
 export default function Mapbox({longitude, latitude, startingZoom}) {
 
@@ -47,9 +48,12 @@ export default function Mapbox({longitude, latitude, startingZoom}) {
             })
         })
         
+        document.getElementsByClassName('mapboxgl-control-container')[0].setAttribute('display', 'none')
+        
     }, [])
     
     return (
-            <div ref={mapContainer} className="map-container"/>
+        
+            <div ref={mapContainer} className="map-container" />
     )
 }
