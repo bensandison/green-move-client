@@ -8,8 +8,6 @@ export default function SingleLeafScore({ decimal }) {
 	const roundDecimal = Math.round(decimal * 4) / 4;
 	const cropWidth = roundDecimal * 44;
 
-	console.log(roundDecimal);
-
 	return (
 		<Grid gap="0">
 			<GridItem gridColumn="1" gridRow="1">
