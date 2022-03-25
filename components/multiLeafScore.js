@@ -8,13 +8,13 @@ export default function MultiLeafScore({ score }) {
 	const decimal = score % 1;
 
 	return (
-		<Stack direction="row" spacing={1}>
+		<>
 			{Array(fullLeaves).fill(
 				<Box>
 					<Image src={DetailLeaf} alt="detailed leaf emoji" />
 				</Box>
 			)}
 			<SingleLeafScore decimal={decimal}></SingleLeafScore>
-		</Stack>
+		</>
 	);
 }
