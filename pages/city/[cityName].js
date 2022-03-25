@@ -46,7 +46,7 @@ export default function CityData() {
 			<Text fontWeight="semibold" fontSize="7xl" mt={-5}>
 				{cityData.rating}
 			</Text>
-			<MultiLeafScore></MultiLeafScore>
+			<MultiLeafScore score={cityData.rating}></MultiLeafScore>
 			<Text fontWeight="semibold" fontSize="lg">
 				Detailed Information
 			</Text>
