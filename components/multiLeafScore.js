@@ -7,13 +7,18 @@ export default function MultiLeafScore({ score }) {
 	const fullLeaves = Math.floor(score);
 	const decimal = score % 1;
 
+	let leafArr = [];
+	for (let i = 0; i < fullLeaves; i++) {
+		leafArr.push(
+			<Box>
+				<Image src={DetailLeaf} alt="detailed leaf emoji" />
+			</Box>
+		);
+	}
+
 	return (
 		<>
-			{Array(fullLeaves).fill(
-				<Box>
-					<Image src={DetailLeaf} alt="detailed leaf emoji" />
-				</Box>
-			)}
+			{leafArr}
 			<SingleLeafScore decimal={decimal}></SingleLeafScore>
 		</>
 	);
