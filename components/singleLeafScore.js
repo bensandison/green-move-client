@@ -1,18 +1,16 @@
 import { Grid, GridItem } from "@chakra-ui/react";
 
 export default function SingleLeafScore({ decimal }) {
-	const height = 45;
-
 	// calc width of leaf from decimal value:
 	// round to nearest .25
 	const roundDecimal = Math.round(decimal * 4) / 4;
-	const cropWidth = roundDecimal * 44;
+	const cropWidth = roundDecimal * 44 + 0.001; // add 0.1 because viewBox must be more than 0
 
 	return (
 		<Grid gap="0">
 			<GridItem gridColumn="1" gridRow="1">
 				<svg
-					height={height}
+					height="45"
 					viewBox="0 0 44 56"
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +26,7 @@ export default function SingleLeafScore({ decimal }) {
 			</GridItem>
 			<GridItem gridColumn="1" gridRow="1">
 				<svg
-					height={height}
+					height="45"
 					viewBox={`0 0 ${cropWidth} 56`}
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
