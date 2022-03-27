@@ -1,4 +1,4 @@
-import { Box, Container, HStack, Text } from "@chakra-ui/react";
+import { Box, Container, Flex, HStack, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import leafLogoSVG from "../public/leaf-logo.svg";
 
@@ -20,11 +20,10 @@ export default function Header() {
 				zIndex: "99",
 			}}
 		>
-			<Container maxW="container.xl" height="100%">
+			<Container maxW="container.lg" height="100%">
 				<HStack
 					as="nav"
-					gap={4}
-					mx={3}
+					gap={0}
 					py={2}
 					justify="flex-start"
 					align="center"
@@ -33,15 +32,21 @@ export default function Header() {
 					textAlign="center"
 					fontWeight="bold"
 				>
-					<HStack _hover={navItemStylesHover} align="center" borderRadius="xl">
+					<Flex
+						_hover={navItemStylesHover}
+						align="center"
+						borderRadius="xl"
+						py={1}
+						px={2}
+					>
 						<Image
 							src={leafLogoSVG}
 							alt="leaf-logo"
-							width={40}
-							height={40}
+							width={30}
+							height={30}
 						></Image>
 						<Text>GreenMove.</Text>
-					</HStack>
+					</Flex>
 				</HStack>
 			</Container>
 		</Box>
