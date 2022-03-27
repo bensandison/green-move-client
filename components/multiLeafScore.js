@@ -10,7 +10,7 @@ export default function MultiLeafScore({ score }) {
 	let leafArr = [];
 	for (let i = 0; i < fullLeaves; i++) {
 		leafArr.push(
-			<Box>
+			<Box key={i}>
 				<Image src={DetailLeaf} alt="detailed leaf emoji" />
 			</Box>
 		);
