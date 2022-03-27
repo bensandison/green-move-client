@@ -1,6 +1,7 @@
 import { Box, Container, Flex, HStack, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import leafLogoSVG from "../public/leaf-logo.svg";
+import Router from "next/router";
 
 const navItemStylesHover = {
 	bgColor: "white",
@@ -38,6 +39,9 @@ export default function Header() {
 						borderRadius="xl"
 						py={1}
 						px={2}
+						onClick={() => {
+							Router.push(`/`);
+						}}
 					>
 						<Image
 							src={leafLogoSVG}
