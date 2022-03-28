@@ -44,7 +44,7 @@ export default function CityData() {
 		<Flex maxW="container.md" direction="column" py={4} m="auto">
 			<SearchBar value={cityData.name}></SearchBar>
 			<AspectRatio my="4" ratio={[1, 2 / 1, 3 / 1]} borderRadius="md">
-				<Mapbox longitude={cityData.lng} latitude={cityData.lat} startingZoom={9}></Mapbox>
+				<Mapbox longitude={cityData.lng} latitude={cityData.lat} startingZoom={10}></Mapbox>
 			</AspectRatio>
 			<Text fontWeight="semibold" fontSize="lg">
 				Overall Rating
