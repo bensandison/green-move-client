@@ -17,9 +17,15 @@ import {
 	AlertIcon,
 	AlertTitle,
 	AlertDescription,
+  InputGroup,
+	InputRightElement,
+	Input,
+	Container,
 } from "@chakra-ui/react";
 import InfoCard from "../../components/infoCard";
 import SearchBar from "../../components/searchBar";
+import { SearchIcon } from "@chakra-ui/icons";
+import Mapbox from '../../components/map.js'
 import MultiLeafScore from "../../components/multiLeafScore";
 
 export default function CityData() {
