@@ -7,16 +7,19 @@ import {
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { useState } from "react";
-import Router from "next/router";
+import { useRouter } from "next/router";
 
 export default function SearchBar(props) {
+	const router = useRouter();
+
 	const [searchQuery, setSearchQuery] = useState("");
 
 	function handleSearchSubmit(e) {
+		e.preventDefault();
 		// Check search bar has text inside
 		if (searchQuery.replace(/\s/g, "") !== "") {
 			// Send user to route of new city:
-			Router.push(`/city/${searchQuery}`);
+			router.push(`/city/${searchQuery}`);
 		}
 	}
 
