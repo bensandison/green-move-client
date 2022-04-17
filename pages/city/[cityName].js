@@ -17,7 +17,7 @@ import {
 	AlertIcon,
 	AlertTitle,
 	AlertDescription,
-  InputGroup,
+	InputGroup,
 	InputRightElement,
 	Input,
 	Container,
@@ -25,10 +25,41 @@ import {
 import InfoCard from "../../components/infoCard";
 import SearchBar from "../../components/searchBar";
 import { SearchIcon } from "@chakra-ui/icons";
-import Mapbox from '../../components/map.js'
+import Mapbox from "../../components/map.js";
 import MultiLeafScore from "../../components/multiLeafScore";
 
-export default function CityData() {
+export async function getStaticPaths() {
+	// Get city names from API:
+	const res = await fetch(`https://api.greenmove.tk/city/all`);
+	const data = await res.json();
+	const cityData = data.data;
+
+	// Define city paths with city names:
+	const paths = cityData.map((city) => ({
+		params: { cityName: city.name.toLowerCase() },
+	}));
+
+	// Return city names to getStaticProps:
+	return {
+		paths: paths,
+		fallback: false,
+	};
+}
+
+export async function getStaticProps({ params }) {
+	// Get data for current city:
+	const res = await fetch(
+		`https://api.greenmove.tk/city/search?name=${params.cityName}`
+	);
+	let data = await res.json();
+
+	// Send data to cityData function:
+	return { props: { name: params } };
+}
+
+export default function CityData(props) {
+	console.log(props);
+
 	// loading + error state for fetch
 	const [loading, setLoading] = useBoolean(true);
 	const [error, setError] = useState();
