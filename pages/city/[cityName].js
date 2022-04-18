@@ -26,13 +26,13 @@ export async function getStaticPaths() {
 	const cityData = data.data;
 
 	// Define city paths with city names:
-	const paths = cityData.map((city) => ({
+	const cityPaths = cityData.map((city) => ({
 		params: { cityName: city.name.toLowerCase() },
 	}));
 
 	// Return city names to getStaticProps:
 	return {
-		paths,
+		paths: cityPaths,
 		fallback: false,
 	};
 }
@@ -45,12 +45,14 @@ export async function getStaticProps({ params }) {
 	const data = await res.json();
 	const cityData = data.data;
 
+	// Manually force 404:
+	if (!cityData) return { notFound: true };
+
 	// Send data to cityData function:
 	return { props: { cityData: cityData } };
 }
 
 export default function CityData({ cityData }) {
-	console.log(cityData);
 	return (
 		<Flex gap={4} maxW="container.md" direction="column" py={4} m="auto">
 			<Box>
