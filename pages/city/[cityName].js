@@ -9,22 +9,13 @@ import {
 	Box,
 	Stack,
 	Heading,
-	useBoolean,
-	Skeleton,
-	Spinner,
-	Progress,
 	Alert,
 	AlertIcon,
 	AlertTitle,
 	AlertDescription,
-	InputGroup,
-	InputRightElement,
-	Input,
-	Container,
 } from "@chakra-ui/react";
 import InfoCard from "../../components/infoCard";
 import SearchBar from "../../components/searchBar";
-import { SearchIcon } from "@chakra-ui/icons";
 import Mapbox from "../../components/map.js";
 import MultiLeafScore from "../../components/multiLeafScore";
 
@@ -41,7 +32,7 @@ export async function getStaticPaths() {
 
 	// Return city names to getStaticProps:
 	return {
-		paths: paths,
+		paths,
 		fallback: false,
 	};
 }
@@ -51,13 +42,15 @@ export async function getStaticProps({ params }) {
 	const res = await fetch(
 		`https://api.greenmove.tk/city/search?name=${params.cityName}`
 	);
-	let data = await res.json();
+	const data = await res.json();
+	const cityData = data.data;
 
 	// Send data to cityData function:
-	return { props: { cityData: data.data } };
+	return { props: { cityData: cityData } };
 }
 
 export default function CityData({ cityData }) {
+	console.log(cityData);
 	return (
 		<Flex gap={4} maxW="container.md" direction="column" py={4} m="auto">
 			<Box>
@@ -68,7 +61,7 @@ export default function CityData({ cityData }) {
 					<Alert mt={2} status="error">
 						<AlertIcon></AlertIcon>
 						<AlertTitle>Search Error</AlertTitle>
-						<AlertDescription>{error}</AlertDescription>
+						<AlertDescription>This city was not found</AlertDescription>
 					</Alert>
 				)}
 			</Box>
