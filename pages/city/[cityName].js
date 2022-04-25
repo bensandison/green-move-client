@@ -48,23 +48,18 @@ export async function getStaticProps({ params }) {
 	// Manually force 404:
 	if (!cityData) return { notFound: true };
 
+	//get data for all cities
+	const resAll = await fetch("https://api.greenmove.io/places/all");
 
-    //get data for all cities
-    const resAll = await fetch(
-        'https://api.greenmove.io/places/all'
-    )
-
-	const allData = await resAll.json()
-    const allPlaces = allData.data
+	const allData = await resAll.json();
+	const allPlaces = allData.data;
 
 	// Send data to cityData function:
 	return { props: { cityData: cityData, allPlaces: allPlaces } };
 }
 
 export default function CityData({ cityData, allPlaces }) {
-	
 	return (
-		
 		<Flex gap={4} maxW="container.md" direction="column" py={4} m="auto">
 			<Box>
 				<SearchBar
