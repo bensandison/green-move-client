@@ -79,7 +79,11 @@ export default function CityData({ cityData, allPlaces }) {
 						<Heading size="md" fontWeight="medium" pb="2">
 							{`${cityData.name}, ${cityData.county}, ${cityData.country}`}
 						</Heading>
-						<AspectRatio ratio={[1, 2 / 1, 3 / 1]} borderRadius="md">
+						<AspectRatio
+							ratio={[1, 2 / 1, 5 / 2]}
+							borderRadius="lg"
+							overflow="hidden"
+						>
 							<Mapbox
 								longitude={cityData.longitude}
 								latitude={cityData.latitude}
