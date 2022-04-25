@@ -21,7 +21,7 @@ import MultiLeafScore from "../../components/multiLeafScore";
 
 export async function getStaticPaths() {
 	// Get city names from API:
-	const res = await fetch(`https://api.greenmove.tk/city/all`);
+	const res = await fetch(`https://api.greenmove.io/places/all`);
 	const data = await res.json();
 	const cityData = data.data;
 
@@ -40,7 +40,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
 	// Get data for current city:
 	const res = await fetch(
-		`https://api.greenmove.tk/city/search?name=${params.cityName}`
+		`https://api.greenmove.io/places/search?name=${params.cityName}`
 	);
 	const data = await res.json();
 	const cityData = data.data;
@@ -48,12 +48,23 @@ export async function getStaticProps({ params }) {
 	// Manually force 404:
 	if (!cityData) return { notFound: true };
 
+
+    //get data for all cities
+    const resAll = await fetch(
+        'https://api.greenmove.io/places/all'
+    )
+
+	const allData = await resAll.json()
+    const allPlaces = allData.data
+
 	// Send data to cityData function:
-	return { props: { cityData: cityData } };
+	return { props: { cityData: cityData, allPlaces: allPlaces } };
 }
 
-export default function CityData({ cityData }) {
+export default function CityData({ cityData, allPlaces }) {
+	
 	return (
+		
 		<Flex gap={4} maxW="container.md" direction="column" py={4} m="auto">
 			<Box>
 				<SearchBar
@@ -75,9 +86,10 @@ export default function CityData({ cityData }) {
 						</Heading>
 						<AspectRatio ratio={[1, 2 / 1, 3 / 1]} borderRadius="md">
 							<Mapbox
-								longitude={cityData.lng}
-								latitude={cityData.lat}
+								longitude={cityData.longitude}
+								latitude={cityData.latitude}
 								startingZoom={10}
+								allPlaces={allPlaces}
 							></Mapbox>
 						</AspectRatio>
 					</Box>

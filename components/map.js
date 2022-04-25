@@ -5,7 +5,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { Box } from "@chakra-ui/react";
 // import ReactMapGL, { Marker } from 'react-map-gl'
 
-export default function Mapbox({ longitude, latitude, startingZoom, showAll }) {
+export default function Mapbox({ longitude, latitude, startingZoom, allPlaces, showAll }) {
 	mapboxgl.accessToken =
 		"pk.eyJ1IjoiY2FsZWJwZXJjaXZhbCIsImEiOiJjbDBncW4wMjMwMGF5M29vMm54Z3V5OHUzIn0.g-0lgFtFCuhbov3ppFMXqQ";
 
@@ -28,19 +28,20 @@ export default function Mapbox({ longitude, latitude, startingZoom, showAll }) {
 
 	const [cities, setCities] = useState();
 
+
+
 	useEffect(() => {
 		if (!map.current) return; // wait for map to initialize
-
-		async function getData() {
-			//gets data for all cities
-			const res = await fetch("https://api.greenmove.tk/city/all");
-
-			let data = await res.json();
-			data = data.data;
-			setCities(data);
-		}
-
-		getData();
+		
+		// async function getData() {
+		// 	//gets data for all cities
+		// 	const res = await fetch("https://api.greenmove.tk/places/all");
+	
+		// 	let data = await res.json();	
+		// 	data = data.data;
+		// 	setCities(data);
+		// }
+		// getData();
 
 		let geojson = {
 			type: "FeatureCollection",
@@ -52,13 +53,15 @@ export default function Mapbox({ longitude, latitude, startingZoom, showAll }) {
 				type: "Feature",
 				geometry: {
 					type: "Point",
-					// 'coordinates': [cities[i].lat, cities[i].lng]
+					'coordinates': [allPlaces[i].longitude, allPlaces[i].latitude]
 				},
 				properties: {
-					// 'title': cities.name
+					'title': allPlaces[i].name
 				},
 			});
 		}
+
+		console.log(geojson)
 
 		map.current.on("load", () => {
 			// Add an image to use as a custom marker
@@ -89,61 +92,64 @@ export default function Mapbox({ longitude, latitude, startingZoom, showAll }) {
 					});
 				}
 			);
-			// });
+			});
 
-			// map.current.on('load', () => {
+			
 
-			// map.current.addSource('boundries', {
-			//     type: 'geojson',
-			//     data: '/boundries.geojson'
-			// })
+		// 	map.current.on('load', () => {
 
-			//     getData()
-			//     let geojson = {
-			//             type: 'FeatureCollection',
-			//             features: [{
-			//                 type: 'Feature',
-			//                 geometry: {
-			//                     type: 'Point',
-			//                     coordinates: [-77.032, 38.913]
-			//                 },
-			//                 properties: {
-			//                     title: 'Mapbox',
-			//                     description: 'Washington, D.C.'
-			//                 }
-			//             }]
-			//     }
+		// 	map.current.addSource('boundries', {
+		// 	    type: 'geojson',
+		// 	    data: '/boundries.geojson'
+		// 	})
 
-			//     map.current.addSource('allCities', {
-			//         type: 'geojson',
-			//         data: geojson
-			//     })
+		// 	    getData()
+		// 	    let geojson = {
+		// 	            type: 'FeatureCollection',
+		// 	            features: [{
+		// 	                type: 'Feature',
+		// 	                geometry: {
+		// 	                    type: 'Point',
+		// 	                    coordinates: [-77.032, 38.913]
+		// 	                },
+		// 	                properties: {
+		// 	                    title: 'Mapbox',
+		// 	                    description: 'Washington, D.C.'
+		// 	                }
+		// 	            }]
+		// 	    }
 
-			//     map.current.addLayer({
-			//         'id':'markers',
-			//         'type':''
-			//     })
+		// 	    map.current.addSource('allCities', {
+		// 	        type: 'geojson',
+		// 	        data: geojson
+		// 	    })
 
-			// map.current.addLayer({
-			//     'id': 'countyBoundries',
-			//     'type': 'line',
-			//     'source': 'boundries',
-			//     'paint': {
-			//         'line-color': '#000',
-			//         'line-width': 3
-			//     }
-			// })
+		// 	    map.current.addLayer({
+		// 	        'id':'markers',
+		// 	        'type':''
+		// 	    })
 
-			//     // map.current.addLayer({
-			//     //     'id': 'countyFill',
-			//     //     'type': 'fill',
-			//     //     'source': 'mapdata',
-			//     //     'paint': {
-			//     //         'fill-color': '#090'
-			//     //     }
-			//     // })
-			// })
-		});
+		// 	map.current.addLayer({
+		// 	    'id': 'countyBoundries',
+		// 	    'type': 'line',
+		// 	    'source': 'boundries',
+		// 	    'paint': {
+		// 	        'line-color': '#000',
+		// 	        'line-width': 3
+		// 	    }
+		// 	})
+
+		// 	    // map.current.addLayer({
+		// 	    //     'id': 'countyFill',
+		// 	    //     'type': 'fill',
+		// 	    //     'source': 'mapdata',
+		// 	    //     'paint': {
+		// 	    //         'fill-color': '#090'
+		// 	    //     }
+		// 	    // })
+		// 	})
+		// });
+		
 	}, []);
 
 	return <div ref={mapContainer} className="map-container" />;

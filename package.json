@@ -13,6 +13,7 @@
 		"@emotion/react": "^11.8.1",
 		"@emotion/styled": "^11.8.1",
 		"framer-motion": "^6.2.8",
+		"mapbox": "^1.0.0-beta10",
 		"mapbox-gl": "^2.7.1",
 		"next": "12.1.0",
 		"react": "17.0.2",
