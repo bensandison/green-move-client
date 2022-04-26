@@ -97,13 +97,14 @@ export default function CityData({ cityData, allPlaces }) {
 			{cityData && (
 				<>
 					<Box>
-						<Heading size="md" fontWeight="medium" pb="2">
+						<Heading size="md" fontWeight="semibold" pb={[1, 2, 2]}>
 							{`${cityData.name}, ${cityData.county}, ${cityData.country}`}
 						</Heading>
 						<AspectRatio
 							ratio={[1, 2 / 1, 5 / 2]}
 							borderRadius="lg"
 							overflow="hidden"
+							boxShadow="lg"
 						>
 							<Mapbox
 								longitude={cityData.longitude}
@@ -115,9 +116,9 @@ export default function CityData({ cityData, allPlaces }) {
 					</Box>
 
 					<Box>
-						<Text fontWeight="semibold" fontSize="lg">
+						<Heading fontWeight="semibold" fontSize="lg">
 							Enviromental Rating
-						</Text>
+						</Heading>
 						<Stack mt="2" direction="row" spacing={1}>
 							<MultiLeafScore score={cityData.rating}></MultiLeafScore>
 							<Text fontWeight="semibold" fontSize="3xl" alignSelf="flex-end">
@@ -126,9 +127,9 @@ export default function CityData({ cityData, allPlaces }) {
 						</Stack>
 					</Box>
 					<Box>
-						<Text fontWeight="semibold" fontSize="lg">
+						<Heading fontWeight="medium" fontSize="lg">
 							Detailed Information
-						</Text>
+						</Heading>
 						<SimpleGrid mt="2" columns={[2, 3, 4]} spacing={4}>
 							<InfoCard
 								title="Air Quality"
