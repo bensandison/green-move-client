@@ -13,11 +13,14 @@ import {
 	AlertIcon,
 	AlertTitle,
 	AlertDescription,
+	Button,
 } from "@chakra-ui/react";
 import InfoCard from "../../components/infoCard";
 import SearchBar from "../../components/searchBar";
 import Mapbox from "../../components/map.js";
 import MultiLeafScore from "../../components/multiLeafScore";
+import greenMoveLogo from "../../public/green-move-logo.svg";
+import Image from "next/image";
 
 export async function getStaticPaths() {
 	// Get city names from API:
@@ -59,8 +62,26 @@ export async function getStaticProps({ params }) {
 }
 
 export default function CityData({ cityData, allPlaces }) {
+	const router = useRouter();
+
 	return (
 		<Flex gap={4} maxW="container.md" direction="column" py={4} m="auto">
+			<Box
+				as="button"
+				mr="auto"
+				onClick={(e) => {
+					e.preventDefault();
+					router.push("/");
+				}}
+			>
+				<Image
+					src={greenMoveLogo}
+					alt="leaf-logo"
+					height="25"
+					width="180"
+				></Image>
+			</Box>
+
 			<Box>
 				<SearchBar
 					value={cityData ? cityData.name : "Enter City Name"}
