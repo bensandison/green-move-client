@@ -17,8 +17,9 @@ export default function SearchBar(props) {
 		e.preventDefault();
 		// Check search bar has text inside
 		if (searchQuery.replace(/\s/g, "") !== "") {
+			// Change query to lower case:
 			// Send user to route of new city:
-			router.push(`/city/${searchQuery}`);
+			router.push(`/city/${searchQuery.toLowerCase()}`);
 		}
 	}
 

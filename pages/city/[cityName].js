@@ -13,11 +13,14 @@ import {
 	AlertIcon,
 	AlertTitle,
 	AlertDescription,
+	Button,
 } from "@chakra-ui/react";
 import InfoCard from "../../components/infoCard";
 import SearchBar from "../../components/searchBar";
 import Mapbox from "../../components/map.js";
 import MultiLeafScore from "../../components/multiLeafScore";
+import greenMoveLogo from "../../public/green-move-logo.svg";
+import Image from "next/image";
 
 export async function getStaticPaths() {
 	// Get city names from API:
@@ -48,24 +51,37 @@ export async function getStaticProps({ params }) {
 	// Manually force 404:
 	if (!cityData) return { notFound: true };
 
+	//get data for all cities
+	const resAll = await fetch("https://api.greenmove.io/places/all");
 
-    //get data for all cities
-    const resAll = await fetch(
-        'https://api.greenmove.io/places/all'
-    )
-
-	const allData = await resAll.json()
-    const allPlaces = allData.data
+	const allData = await resAll.json();
+	const allPlaces = allData.data;
 
 	// Send data to cityData function:
 	return { props: { cityData: cityData, allPlaces: allPlaces } };
 }
 
 export default function CityData({ cityData, allPlaces }) {
-	
+	const router = useRouter();
+
 	return (
-		
 		<Flex gap={4} maxW="container.md" direction="column" py={4} m="auto">
+			<Box
+				as="button"
+				mr="auto"
+				onClick={(e) => {
+					e.preventDefault();
+					router.push("/");
+				}}
+			>
+				<Image
+					src={greenMoveLogo}
+					alt="leaf-logo"
+					height="25"
+					width="180"
+				></Image>
+			</Box>
+
 			<Box>
 				<SearchBar
 					value={cityData ? cityData.name : "Enter City Name"}
@@ -84,7 +100,11 @@ export default function CityData({ cityData, allPlaces }) {
 						<Heading size="md" fontWeight="medium" pb="2">
 							{`${cityData.name}, ${cityData.county}, ${cityData.country}`}
 						</Heading>
-						<AspectRatio ratio={[1, 2 / 1, 3 / 1]} borderRadius="md">
+						<AspectRatio
+							ratio={[1, 2 / 1, 5 / 2]}
+							borderRadius="lg"
+							overflow="hidden"
+						>
 							<Mapbox
 								longitude={cityData.longitude}
 								latitude={cityData.latitude}
