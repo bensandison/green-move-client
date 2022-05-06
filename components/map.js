@@ -9,6 +9,7 @@ export default function Mapbox({
   longitude,
   latitude,
   startingZoom,
+  cityBoundary,
   allPlaces,
 }) {
   mapboxgl.accessToken =
@@ -19,21 +20,26 @@ export default function Mapbox({
   const [lng, setLng] = useState(longitude);
   const [lat, setLat] = useState(latitude);
   const [zoom, setZoom] = useState(startingZoom);
+  const [boundary, setBoundary] = useState(cityBoundary);
 
   useEffect(() => {
     if (map.current) {
       map.current.remove();
       setLng(longitude);
       setLat(latitude);
+      setBoundary(cityBoundary);
     }
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/outdoors-v11",
       center: [lng, lat],
       zoom: zoom,
-	  minZoom:zoom,
-	  maxZoom:zoom,
-	  maxBounds: [[lng, lat],[lng, lat]]
+      minZoom: zoom,
+      maxZoom: zoom,
+      maxBounds: [
+        [lng, lat],
+        [lng, lat],
+      ],
     });
     mapContainer.current.classList.add("map");
   });
@@ -43,59 +49,22 @@ export default function Mapbox({
   useEffect(() => {
     if (!map.current) return; // wait for map to initialize
 
-    // 	map.current.on('load', () => {
+    map.current.on("load", () => {
+      map.current.addSource("boundary", {
+        type: "geojson",
+        data: boundary,
+      });
 
-    // 	map.current.addSource('boundries', {
-    // 	    type: 'geojson',
-    // 	    data: '/boundries.geojson'
-    // 	})
-
-    // 	    getData()
-    // 	    let geojson = {
-    // 	            type: 'FeatureCollection',
-    // 	            features: [{
-    // 	                type: 'Feature',
-    // 	                geometry: {
-    // 	                    type: 'Point',
-    // 	                    coordinates: [-77.032, 38.913]
-    // 	                },
-    // 	                properties: {
-    // 	                    title: 'Mapbox',
-    // 	                    description: 'Washington, D.C.'
-    // 	                }
-    // 	            }]
-    // 	    }
-
-    // 	    map.current.addSource('allCities', {
-    // 	        type: 'geojson',
-    // 	        data: geojson
-    // 	    })
-
-    // 	    map.current.addLayer({
-    // 	        'id':'markers',
-    // 	        'type':''
-    // 	    })
-
-    // 	map.current.addLayer({
-    // 	    'id': 'countyBoundries',
-    // 	    'type': 'line',
-    // 	    'source': 'boundries',
-    // 	    'paint': {
-    // 	        'line-color': '#000',
-    // 	        'line-width': 3
-    // 	    }
-    // 	})
-
-    // 	    // map.current.addLayer({
-    // 	    //     'id': 'countyFill',
-    // 	    //     'type': 'fill',
-    // 	    //     'source': 'mapdata',
-    // 	    //     'paint': {
-    // 	    //         'fill-color': '#090'
-    // 	    //     }
-    // 	    // })
-    // 	})
-    // });
+      map.current.addLayer({
+        id: "cityBoundary",
+        type: "line",
+        source: "boundary",
+        paint: {
+          "line-color": "#000",
+          "line-width": 3,
+        },
+      });
+    });
   }, []);
 
   return <div ref={mapContainer} className="map-container" />;
