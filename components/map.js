@@ -32,7 +32,8 @@ export default function Mapbox({
       center: [lng, lat],
       zoom: zoom,
 	  minZoom:zoom,
-	  maxZoom:zoom
+	  maxZoom:zoom,
+	  maxBounds: [[lng, lat],[lng, lat]]
     });
     mapContainer.current.classList.add("map");
   });
