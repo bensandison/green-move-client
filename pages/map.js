@@ -1,4 +1,4 @@
-import Mapbox from "../components/map";
+import InteractiveMap from "../components/interactiveMap";
 
 import { useEffect, useState } from "react";
 import CityData from "./city/[cityName]";
@@ -19,12 +19,12 @@ export async function getStaticProps() {
 
 export default function MapPage({ allPlaces }) {
   return (
-    <Mapbox
+    <InteractiveMap
       longitude={3}
       latitude={55}
       startingZoom={2}
       showAll={true}
       allPlaces={allPlaces}
-    ></Mapbox>
+    ></InteractiveMap>
   );
 }
