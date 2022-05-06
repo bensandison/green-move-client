@@ -44,8 +44,6 @@ export default function Mapbox({
     mapContainer.current.classList.add("map");
   });
 
-  const [cities, setCities] = useState();
-
   useEffect(() => {
     if (!map.current) return; // wait for map to initialize
 
@@ -65,7 +63,7 @@ export default function Mapbox({
         },
       });
     });
-  }, []);
+  });
 
   return <div ref={mapContainer} className="map-container" />;
 }
