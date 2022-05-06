@@ -31,6 +31,8 @@ export default function Mapbox({
       style: "mapbox://styles/mapbox/outdoors-v11",
       center: [lng, lat],
       zoom: zoom,
+	  minZoom:zoom,
+	  maxZoom:zoom
     });
     mapContainer.current.classList.add("map");
   });
