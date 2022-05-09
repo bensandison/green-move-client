@@ -1,6 +1,6 @@
 import { Box, Text } from "@chakra-ui/react";
 
-export default function InfoCard({ title, value }) {
+export default function PropertyCard({ title, value }) {
 	return (
 		<Box borderWidth={2} borderRadius="md" p={3}>
 			<Text fontSize="lg" fontWeight="semibold">
