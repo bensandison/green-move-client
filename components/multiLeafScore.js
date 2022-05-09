@@ -40,8 +40,6 @@ export default function MultiLeafScore({ score }) {
 	const fullLeaves = Math.floor(score);
 	const decimal = score % 1;
 
-	console.log(fullLeaves);
-
 	let leafArr = [];
 	for (let i = 0; i < 5; i++) {
 		if (i < fullLeaves) {
