@@ -1,7 +1,6 @@
 import { Box, Text } from "@chakra-ui/react";
 
 export default function QualityCard({ title, value, percent }) {
-	percent = 70;
 	const roundedPercent = Math.ceil(percent / 5) * 5;
 
 	let barColour = "green";
