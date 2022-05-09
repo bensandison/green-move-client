@@ -15,7 +15,7 @@ import {
 	AlertDescription,
 	Button,
 } from "@chakra-ui/react";
-import PropertyCard from "../../components/PropertyCard";
+import PropertyCard from "../../components/propertyCard";
 import QualityCard from "../../components/qualityCard";
 import SearchBar from "../../components/searchBar";
 import Mapbox from "../../components/map.js";
