@@ -44,7 +44,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
 	// Get data for current city:
 	const res = await fetch(
-    `https://api.greenmove.io/places/search?name=${params.cityName}`
+		`https://greenmove-api.herokuapp.com/places/search?name=${params.cityName}`
 	);
 	const data = await res.json();
 	const cityData = data.data;
@@ -52,15 +52,9 @@ export async function getStaticProps({ params }) {
 	// Manually force 404:
 	if (!cityData) return { notFound: true };
 
-	//get data for all cities
-  const resAll = await fetch("https://api.greenmove.io/places/all");
-
-	const allData = await resAll.json();
-	const allPlaces = allData.data;
-
 	//get city boundary
 	const resBoundary = await fetch(
-    `https://api.greenmove.io/places/${cityData.place_id}/boundary`
+		`https://greenmove-api.herokuapp.com/places/${cityData.place_id}/boundary`
 	);
 
 	const boundaryData = await resBoundary.json();
@@ -71,12 +65,11 @@ export async function getStaticProps({ params }) {
 		props: {
 			cityData: cityData,
 			cityBoundary: cityBoundary,
-			allPlaces: allPlaces,
 		},
 	};
 }
 
-export default function CityData({ cityData, allPlaces, cityBoundary }) {
+export default function CityData({ cityData, cityBoundary }) {
 	const router = useRouter();
 
 	return (
@@ -126,7 +119,6 @@ export default function CityData({ cityData, allPlaces, cityBoundary }) {
 								latitude={cityData.latitude}
 								startingZoom={10}
 								cityBoundary={cityBoundary}
-								allPlaces={allPlaces}
 							></Mapbox>
 						</AspectRatio>
 					</Box>
