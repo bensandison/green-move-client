@@ -57,8 +57,17 @@ export default function Mapbox({
 				type: "line",
 				source: "boundary",
 				paint: {
-					"line-color": "#000",
-					"line-width": 3,
+					"line-color": "#007510",
+					"line-width": 2,
+				},
+			});
+			map.current.addLayer({
+				id: "cityFill",
+				type: "fill",
+				source: "boundary",
+				paint: {
+					"fill-color": "#1eeb3a",
+					"fill-opacity": 0.25,
 				},
 			});
 		});
