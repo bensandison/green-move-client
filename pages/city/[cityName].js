@@ -52,8 +52,6 @@ export async function getStaticProps({ params }) {
   // Manually force 404:
   if (!cityData) return { notFound: true };
 
-  console.log(cityData);
-
   //get city boundary
   const resBoundary = await fetch(
     `https://greenmove-api.herokuapp.com/places/${cityData.place_id}/boundary`
