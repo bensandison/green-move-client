@@ -25,9 +25,11 @@ import Image from "next/image";
 
 export async function getStaticPaths() {
 	// Get city names from API:
-	const res = await fetch(`https://greenmove-api.herokuapp.com/places/all`);
+	const res = await fetch(`https://api.greenmove.io/places/all`);
 	const data = await res.json();
 	const cityData = data.data;
+
+	console.log(cityData);
 
 	// Define city paths with city names:
 	const cityPaths = cityData.map((city) => ({
@@ -44,7 +46,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
 	// Get data for current city:
 	const res = await fetch(
-		`https://greenmove-api.herokuapp.com/places/search?name=${params.cityName}`
+		`https://api.greenmove.io/places/search?name=${params.cityName}`
 	);
 	const data = await res.json();
 	const cityData = data.data;
@@ -54,7 +56,7 @@ export async function getStaticProps({ params }) {
 
 	//get city boundary
 	const resBoundary = await fetch(
-		`https://greenmove-api.herokuapp.com/places/${cityData.place_id}/boundary`
+		`https://api.greenmove.io/places/${cityData.place_id}/boundary`
 	);
 
 	const boundaryData = await resBoundary.json();
