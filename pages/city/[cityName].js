@@ -21,6 +21,7 @@ import SearchBar from "../../components/searchBar";
 import Mapbox from "../../components/map.js";
 import MultiLeafScore from "../../components/multiLeafScore";
 import greenMoveLogo from "../../public/green-move-logo.svg";
+import Property from "../../components/Property";
 import Image from "next/image";
 
 export async function getStaticPaths() {
@@ -28,8 +29,6 @@ export async function getStaticPaths() {
 	const res = await fetch(`https://api.greenmove.io/places/all`);
 	const data = await res.json();
 	const cityData = data.data;
-
-	console.log(cityData);
 
 	// Define city paths with city names:
 	const cityPaths = cityData.map((city) => ({
@@ -62,17 +61,58 @@ export async function getStaticProps({ params }) {
 	const boundaryData = await resBoundary.json();
 	const cityBoundary = boundaryData.data;
 
+	//get properties from rightmove
+	let location = cityData.name.toUpperCase();
+	let locationCode = "";
+	for (let i = 0; i < location.length; i = i + 2) {
+		locationCode = locationCode + location.slice(i, i + 2) + "/";
+	}
+
+	const resRightmoveCode = await fetch(
+		`https://www.rightmove.co.uk/typeAhead/uknostreet/${locationCode}`
+	);
+
+	let locationIdData = await resRightmoveCode.json();
+	let locationId = locationIdData.typeAheadLocations[0].locationIdentifier;
+
+	const resProperties = await fetch(
+		`https://www.rightmove.co.uk/api/_search?locationIdentifier=${locationId}&numberOfPropertiesPerPage=24&radius=1.0&sortType=2&index=0&includeSSTC=false&viewType=LIST&channel=BUY&areaSizeUnit=sqft&currencyCode=GBP&isFetching=false&viewport=`
+	);
+
+	let rightmoveProperties = await resProperties.json();
+
 	// Send data to cityData function:
 	return {
 		props: {
 			cityData: cityData,
 			cityBoundary: cityBoundary,
+			rightmoveProperties: rightmoveProperties,
 		},
 	};
 }
 
-export default function CityData({ cityData, cityBoundary }) {
+export default function CityData({
+	cityData,
+	cityBoundary,
+	rightmoveProperties,
+}) {
 	const router = useRouter();
+
+	const propertyListingsArray = rightmoveProperties.properties.splice(0, 9);
+	const propertyListings = propertyListingsArray.map((item, i) => {
+		if (item.propertyImages.mainImageSrc) {
+			return (
+				<Property
+					location={item.displayAddress}
+					summary={item.summary}
+					price={item.price.amount}
+					bedrooms={item.bedrooms}
+					bathrooms={item.bathrooms}
+					imageSrc={item.propertyImages.mainImageSrc}
+				/>
+			);
+		}
+	});
 
 	return (
 		<Flex gap={4} maxW="container.md" direction="column" py={4} m="auto">
@@ -85,7 +125,6 @@ export default function CityData({ cityData, cityBoundary }) {
 				}}
 			>
 				<Image
-					priority
 					src={greenMoveLogo}
 					alt="leaf-logo"
 					height="25"
@@ -122,6 +161,7 @@ export default function CityData({ cityData, cityBoundary }) {
 								latitude={cityData.latitude}
 								startingZoom={10}
 								cityBoundary={cityBoundary}
+								area={cityData.area}
 							></Mapbox>
 						</AspectRatio>
 					</Box>
@@ -147,22 +187,87 @@ export default function CityData({ cityData, cityBoundary }) {
 								value={cityData.air_quality_label}
 								percent={cityData.air_quality}
 							/>
+							<QualityCard
+								title="Population Density"
+								value={`${cityData.population_density}/km\u00B2`}
+							/>
+							<QualityCard
+								title="Greenspace Ratio"
+								value={`${cityData.greenspace_area_ratio}/km\u00B2`}
+							/>
+							<QualityCard
+								title="Park Ratio"
+								value={`${cityData.park_area_ratio}/km\u00B2`}
+							/>
+							<QualityCard
+								title="Park average area"
+								value={`${cityData.park_average_area}m\u00B2`}
+							/>
+							<QualityCard
+								title="People per park"
+								value={`${cityData.park_population_ratio}/1km\u00B2`}
+							/>
+							<QualityCard
+								title="People per bus stop"
+								value={`${cityData.bus_stop_population_ratio}/1`}
+							/>
+							<QualityCard
+								title="People per bicycle parking"
+								value={`${cityData.bicycle_parking_population_ratio}/1`}
+							/>
+							<QualityCard
+								title="Walking routes ratio"
+								value={`${cityData.walking_routes_ratio}/m\u00B2`}
+							/>
+							<QualityCard
+								title="Cycling routes ratio"
+								value={`${cityData.cycling_routes_ratio}/m\u00B2`}
+							/>
 						</SimpleGrid>
 					</Box>
 					<Box>
 						<Heading fontWeight="medium" fontSize="lg">
 							Properties:
 						</Heading>
-						<SimpleGrid mt="2" columns={[2, 3, 4]} spacing={4}>
+						<SimpleGrid mt="2" columns={[2, 3, 3]} spacing={4}>
 							<PropertyCard title="Population" value={cityData.population} />
+							<PropertyCard title="Area" value={`${cityData.area}km\u00B2`} />
 							<PropertyCard
-								title="Vehicle Quantity"
+								title="Greenspace Area"
+								value={`${cityData.greenspace_area}km\u00B2`}
+							/>
+							<PropertyCard
+								title="Number of Parks"
+								value={cityData.park_quantity}
+							/>
+							<PropertyCard
+								title="Registered Vehicle's"
 								value={cityData.vehicle_quantity}
 							/>
 							<PropertyCard
-								title="Bus Stops"
+								title="Bus stops"
 								value={cityData.bus_stop_quantity}
 							/>
+							<PropertyCard
+								title="Bicycle Parking"
+								value={cityData.bicycle_parking_quantity}
+							/>
+							<PropertyCard
+								title="Walking routes length"
+								value={`${cityData.walking_routes_length}m`}
+							/>
+							<PropertyCard
+								title="Cycling routes length"
+								value={`${cityData.cycling_routes_length}m`}
+							/>
+						</SimpleGrid>
+					</Box>
+					<Box>
+						<Heading fontWeight="medium" fontSize="lg">
+							Property Listings:
+						</Heading>
+						<SimpleGrid mt="2" columns={[1, 2, 3]} spacing={4}>
+							{propertyListings}
 						</SimpleGrid>
 					</Box>
 				</>
