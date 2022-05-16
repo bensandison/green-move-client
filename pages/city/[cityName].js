@@ -60,6 +60,28 @@ export async function getStaticProps({ params }) {
   const boundaryData = await resBoundary.json();
   const cityBoundary = boundaryData.data;
 
+  //get properties from rightmove
+  let location = cityData.name.toUpperCase();
+  let locationCode = "";
+  for (let i = 0; i < location.length; i = i + 2) {
+    console.log(location.slice(i, i + 2));
+    locationCode = locationCode + location.slice(i, i + 2) + "/";
+  }
+
+  const resRightmoveCode = await fetch(
+    `https://www.rightmove.co.uk/typeAhead/uknostreet/${locationCode}`
+  );
+
+  let locationIdData = await resRightmoveCode.json();
+  let locationId = locationIdData.typeAheadLocations[0].locationIdentifier;
+
+  const resProperties = await fetch(
+    `https://www.rightmove.co.uk/api/_search?locationIdentifier=${locationId}&numberOfPropertiesPerPage=24&radius=1.0&sortType=2&index=0&includeSSTC=false&viewType=LIST&channel=BUY&areaSizeUnit=sqft&currencyCode=GBP&isFetching=false&viewport=`
+  );
+
+  let rightmoveProperties = await resProperties.json();
+  console.log(rightmoveProperties);
+
   // Send data to cityData function:
   return {
     props: {
