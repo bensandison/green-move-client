@@ -10,8 +10,6 @@ export async function getStaticProps() {
 	const data = await res.json();
 	const allPlaces = data.data;
 
-	if (!allPlaces) return { notFound: true };
-
 	return { props: { allPlaces: allPlaces } };
 }
 
