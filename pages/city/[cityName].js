@@ -85,6 +85,7 @@ export default function CityData({ cityData, cityBoundary }) {
 				}}
 			>
 				<Image
+					priority
 					src={greenMoveLogo}
 					alt="leaf-logo"
 					height="25"
