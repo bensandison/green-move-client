@@ -98,10 +98,6 @@ export default function CityData({
 }) {
   const router = useRouter();
 
-  for (var key in rightmoveProperties.properties) {
-    console.log(key);
-  }
-  //   console.log(rightmoveProperties.data[0]);
   return (
     <Flex gap={4} maxW="container.md" direction="column" py={4} m="auto">
       <Box
@@ -204,6 +200,9 @@ export default function CityData({
                 price={rightmoveProperties.properties[0].price.amount}
                 bedrooms={rightmoveProperties.properties[0].bedrooms}
                 bathrooms={rightmoveProperties.properties[0].bathrooms}
+                imageSrc={
+                  rightmoveProperties.properties[0].propertyImages.mainImageSrc
+                }
               />
               <Property
                 location={rightmoveProperties.properties[1].displayAddress}

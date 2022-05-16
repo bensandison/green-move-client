@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Text, Image } from "@chakra-ui/react";
 
 export default function Property({
   location,
@@ -10,11 +10,14 @@ export default function Property({
 }) {
   return (
     <Box borderWidth={2} borderRadius="md" p={3}>
+      <Box boxSize="sm">
+        <Image src={imageSrc} alt="image of property" />
+      </Box>
       <Text fontSize="lg" fontWeight="semibold">
         {location}
       </Text>
       <Text fontSize="lg" fontWeight="semibold">
-        {price}
+        £{price}
       </Text>
       <Text fontSize="sm" fontWeight="semibold">
         {summary}
