@@ -91,6 +91,23 @@ export default function InteractiveMap({
       );
     });
 
+    // Center the map on the coordinates of the icon click
+    map.current.on("click", "points", (e) => {
+      map.current.flyTo({
+        center: e.features[0].geometry.coordinates,
+      });
+    });
+
+    // Change the cursor to a pointer when it enters the icon.
+    map.current.on("mouseenter", "points", () => {
+      map.current.getCanvas().style.cursor = "pointer";
+    });
+
+    // Change it back to a pointer when it leaves.
+    map.current.on("mouseleave", "points", () => {
+      map.current.getCanvas().style.cursor = "";
+    });
+
     // 	map.current.on('load', () => {
 
     // 	map.current.addSource('boundries', {
