@@ -21,6 +21,7 @@ import SearchBar from "../../components/searchBar";
 import Mapbox from "../../components/map.js";
 import MultiLeafScore from "../../components/multiLeafScore";
 import greenMoveLogo from "../../public/green-move-logo.svg";
+import Property from "../../components/Property";
 import Image from "next/image";
 
 export async function getStaticPaths() {
@@ -64,7 +65,6 @@ export async function getStaticProps({ params }) {
   let location = cityData.name.toUpperCase();
   let locationCode = "";
   for (let i = 0; i < location.length; i = i + 2) {
-    console.log(location.slice(i, i + 2));
     locationCode = locationCode + location.slice(i, i + 2) + "/";
   }
 
@@ -80,20 +80,28 @@ export async function getStaticProps({ params }) {
   );
 
   let rightmoveProperties = await resProperties.json();
-  console.log(rightmoveProperties);
 
   // Send data to cityData function:
   return {
     props: {
       cityData: cityData,
       cityBoundary: cityBoundary,
+      rightmoveProperties: rightmoveProperties,
     },
   };
 }
 
-export default function CityData({ cityData, cityBoundary }) {
+export default function CityData({
+  cityData,
+  cityBoundary,
+  rightmoveProperties,
+}) {
   const router = useRouter();
 
+  for (var key in rightmoveProperties.properties) {
+    console.log(key);
+  }
+  //   console.log(rightmoveProperties.data[0]);
   return (
     <Flex gap={4} maxW="container.md" direction="column" py={4} m="auto">
       <Box
@@ -182,6 +190,41 @@ export default function CityData({ cityData, cityBoundary }) {
               <PropertyCard
                 title="Bus Stops"
                 value={cityData.bus_stop_quantity}
+              />
+            </SimpleGrid>
+          </Box>
+          <Box>
+            <Heading fontWeight="medium" fontSize="lg">
+              Properties:
+            </Heading>
+            <SimpleGrid mt="2" columns={[2, 3, 4]} spacing={4}>
+              <Property
+                location={rightmoveProperties.properties[0].displayAddress}
+                summary={rightmoveProperties.properties[0].summary}
+                price={rightmoveProperties.properties[0].price.amount}
+                bedrooms={rightmoveProperties.properties[0].bedrooms}
+                bathrooms={rightmoveProperties.properties[0].bathrooms}
+              />
+              <Property
+                location={rightmoveProperties.properties[1].displayAddress}
+                summary={rightmoveProperties.properties[1].summary}
+                price={rightmoveProperties.properties[1].price.amount}
+                bedrooms={rightmoveProperties.properties[1].bedrooms}
+                bathrooms={rightmoveProperties.properties[1].bathrooms}
+              />
+              <Property
+                location={rightmoveProperties.properties[2].displayAddress}
+                summary={rightmoveProperties.properties[2].summary}
+                price={rightmoveProperties.properties[2].price.amount}
+                bedrooms={rightmoveProperties.properties[2].bedrooms}
+                bathrooms={rightmoveProperties.properties[2].bathrooms}
+              />
+              <Property
+                location={rightmoveProperties.properties[3].displayAddress}
+                summary={rightmoveProperties.properties[3].summary}
+                price={rightmoveProperties.properties[3].price.amount}
+                bedrooms={rightmoveProperties.properties[3].bedrooms}
+                bathrooms={rightmoveProperties.properties[3].bathrooms}
               />
             </SimpleGrid>
           </Box>
