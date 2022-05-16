@@ -98,6 +98,22 @@ export default function CityData({
 }) {
   const router = useRouter();
 
+  const propertyListingsArray = rightmoveProperties.properties.splice(0, 9);
+  const propertyListings = propertyListingsArray.map((item, i) => {
+    if (item.propertyImages.mainImageSrc) {
+      return (
+        <Property
+          location={item.displayAddress}
+          summary={item.summary}
+          price={item.price.amount}
+          bedrooms={item.bedrooms}
+          bathrooms={item.bathrooms}
+          imageSrc={item.propertyImages.mainImageSrc}
+        />
+      );
+    }
+  });
+
   return (
     <Flex gap={4} maxW="container.md" direction="column" py={4} m="auto">
       <Box
@@ -254,40 +270,10 @@ export default function CityData({
           </Box>
           <Box>
             <Heading fontWeight="medium" fontSize="lg">
-              Properties:
+              Property Listings:
             </Heading>
-            <SimpleGrid mt="2" columns={[2, 3, 4]} spacing={4}>
-              <Property
-                location={rightmoveProperties.properties[0].displayAddress}
-                summary={rightmoveProperties.properties[0].summary}
-                price={rightmoveProperties.properties[0].price.amount}
-                bedrooms={rightmoveProperties.properties[0].bedrooms}
-                bathrooms={rightmoveProperties.properties[0].bathrooms}
-                imageSrc={
-                  rightmoveProperties.properties[0].propertyImages.mainImageSrc
-                }
-              />
-              <Property
-                location={rightmoveProperties.properties[1].displayAddress}
-                summary={rightmoveProperties.properties[1].summary}
-                price={rightmoveProperties.properties[1].price.amount}
-                bedrooms={rightmoveProperties.properties[1].bedrooms}
-                bathrooms={rightmoveProperties.properties[1].bathrooms}
-              />
-              <Property
-                location={rightmoveProperties.properties[2].displayAddress}
-                summary={rightmoveProperties.properties[2].summary}
-                price={rightmoveProperties.properties[2].price.amount}
-                bedrooms={rightmoveProperties.properties[2].bedrooms}
-                bathrooms={rightmoveProperties.properties[2].bathrooms}
-              />
-              <Property
-                location={rightmoveProperties.properties[3].displayAddress}
-                summary={rightmoveProperties.properties[3].summary}
-                price={rightmoveProperties.properties[3].price.amount}
-                bedrooms={rightmoveProperties.properties[3].bedrooms}
-                bathrooms={rightmoveProperties.properties[3].bathrooms}
-              />
+            <SimpleGrid mt="2" columns={[1, 2, 3]} spacing={4}>
+              {propertyListings}
             </SimpleGrid>
           </Box>
         </>
