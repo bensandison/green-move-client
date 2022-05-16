@@ -15,14 +15,16 @@ export default function QualityCard({ title, value, percent }) {
 			<Text fontSize="2xl" fontWeight="semibold">
 				{value}
 			</Text>
-			<Box background="#eee" height="2" borderRadius="xl" width="100%">
-				<Box
-					background={barColour}
-					height="2"
-					borderRadius="xl"
-					width={roundedPercent + "%"}
-				></Box>
-			</Box>
+			{ percent !== undefined &&
+				<Box background="#eee" height="2" borderRadius="xl" width="100%">
+					<Box
+						background={barColour}
+						height="2"
+						borderRadius="xl"
+						width={roundedPercent + "%"}
+					></Box>
+				</Box>
+			}
 		</Box>
 	);
 }

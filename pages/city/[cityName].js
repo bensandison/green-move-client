@@ -171,21 +171,84 @@ export default function CityData({
                 value={cityData.air_quality_label}
                 percent={cityData.air_quality}
               />
+              <QualityCard
+                title="Population Density"
+                value={`${cityData.population_density}/km\u00B2`}
+              />
+              <QualityCard
+                title="Greenspace Ratio"
+                value={`${cityData.greenspace_area_ratio}/km\u00B2`}
+              />
+              <QualityCard
+                title="Park Ratio"
+                value={`${cityData.park_area_ratio}/km\u00B2`}
+              />
+              <QualityCard
+                title="Park average area"
+                value={`${cityData.park_average_area}m\u00B2`}
+              />
+              <QualityCard
+                title="People per park"
+                value={`${cityData.park_population_ratio}/1km\u00B2`}
+              />
+              <QualityCard
+                title="People per bus stop"
+                value={`${cityData.bus_stop_population_ratio}/1`}
+              />
+              <QualityCard
+                title="People per bicycle parking"
+                value={`${cityData.bicycle_parking_population_ratio}/1`}
+              />
+              <QualityCard
+                title="Walking routes ratio"
+                value={`${cityData.walking_routes_ratio}/m\u00B2`}
+              />
+              <QualityCard
+                title="Cycling routes ratio"
+                value={`${cityData.cycling_routes_ratio}/m\u00B2`}
+              />
             </SimpleGrid>
           </Box>
           <Box>
             <Heading fontWeight="medium" fontSize="lg">
               Properties:
             </Heading>
-            <SimpleGrid mt="2" columns={[2, 3, 4]} spacing={4}>
-              <PropertyCard title="Population" value={cityData.population} />
+            <SimpleGrid mt="2" columns={[2, 3, 3]} spacing={4}>
               <PropertyCard
-                title="Vehicle Quantity"
+                title="Population"
+                value={cityData.population}
+              />
+              <PropertyCard
+                title="Area"
+                value={`${cityData.area}km\u00B2`}
+              />
+              <PropertyCard
+                title="Greenspace Area"
+                value={`${cityData.greenspace_area}km\u00B2`}
+              />
+              <PropertyCard
+                title="Number of Parks"
+                value={cityData.park_quantity}
+              />
+              <PropertyCard
+                title="Registered Vehicle's"
                 value={cityData.vehicle_quantity}
               />
               <PropertyCard
-                title="Bus Stops"
+                title="Bus stops"
                 value={cityData.bus_stop_quantity}
+              />
+              <PropertyCard
+                title="Bicycle Parking"
+                value={cityData.bicycle_parking_quantity}
+              />
+              <PropertyCard
+                title="Walking routes length"
+                value={`${cityData.walking_routes_length}m`}
+              />
+              <PropertyCard
+                title="Cycling routes length"
+                value={`${cityData.cycling_routes_length}m`}
               />
             </SimpleGrid>
           </Box>
