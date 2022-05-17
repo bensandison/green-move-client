@@ -85,8 +85,8 @@ export default function Home({ allPlaces, top5Places }) {
 				></SearchBar>
 
 				<Box>
-					<Heading as="h3" fontWeight="semibold" fontSize="lg">
-						Enviromental Rating
+					<Heading as="h3" fontWeight="semibold" fontSize="2xl">
+						Top 5 Cities
 					</Heading>
 					<SimpleGrid mt="2" columns={[1, 2, 5]} spacing={4}>
 						{top5Places.map((item, i) => {
