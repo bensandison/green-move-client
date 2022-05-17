@@ -61,7 +61,9 @@ export async function getStaticProps({ params }) {
 	const boundaryData = await resBoundary.json();
 	const cityBoundary = boundaryData.data;
 
-	//get properties from rightmove
+	//get properties from rightmove:
+	let rightmoveProperties = null; //stores properties
+
 	let location = cityData.name.toUpperCase();
 	let locationCode = "";
 	for (let i = 0; i < location.length; i = i + 2) {
@@ -72,14 +74,18 @@ export async function getStaticProps({ params }) {
 		`https://www.rightmove.co.uk/typeAhead/uknostreet/${locationCode}`
 	);
 
-	let locationIdData = await resRightmoveCode.json();
-	let locationId = locationIdData.typeAheadLocations[0].locationIdentifier;
+	const isJson = resRightmoveCode.headers
+		.get("content-type")
+		?.includes("application/json");
 
-	const resProperties = await fetch(
-		`https://www.rightmove.co.uk/api/_search?locationIdentifier=${locationId}&numberOfPropertiesPerPage=24&radius=1.0&sortType=2&index=0&includeSSTC=false&viewType=LIST&channel=BUY&areaSizeUnit=sqft&currencyCode=GBP&isFetching=false&viewport=`
-	);
-
-	let rightmoveProperties = await resProperties.json();
+	if (isJson && !resRightmoveCode.error) {
+		let locationIdData = await resRightmoveCode.json();
+		let locationId = locationIdData.typeAheadLocations[0].locationIdentifier;
+		const resProperties = await fetch(
+			`https://www.rightmove.co.uk/api/_search?locationIdentifier=${locationId}&numberOfPropertiesPerPage=24&radius=1.0&sortType=2&index=0&includeSSTC=false&viewType=LIST&channel=BUY&areaSizeUnit=sqft&currencyCode=GBP&isFetching=false&viewport=`
+		);
+		rightmoveProperties = await resProperties.json();
+	}
 
 	// Send data to cityData function:
 	return {
@@ -98,21 +104,25 @@ export default function CityData({
 }) {
 	const router = useRouter();
 
-	const propertyListingsArray = rightmoveProperties.properties.splice(0, 9);
-	const propertyListings = propertyListingsArray.map((item, i) => {
-		if (item.propertyImages.mainImageSrc) {
-			return (
-				<Property
-					location={item.displayAddress}
-					summary={item.summary}
-					price={item.price.amount}
-					bedrooms={item.bedrooms}
-					bathrooms={item.bathrooms}
-					imageSrc={item.propertyImages.mainImageSrc}
-				/>
-			);
-		}
-	});
+	// If theres an error with properties:
+	let propertyListings = <Text>Null</Text>;
+	if (rightmoveProperties) {
+		const propertyListingsArray = rightmoveProperties.properties.splice(0, 9);
+		propertyListings = propertyListingsArray.map((item, i) => {
+			if (item.propertyImages.mainImageSrc) {
+				return (
+					<Property
+						location={item.displayAddress}
+						summary={item.summary}
+						price={item.price.amount}
+						bedrooms={item.bedrooms}
+						bathrooms={item.bathrooms}
+						imageSrc={item.propertyImages.mainImageSrc}
+					/>
+				);
+			}
+		});
+	}
 
 	return (
 		<Flex gap={4} maxW="container.md" direction="column" py={4} m="auto">
