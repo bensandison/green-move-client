@@ -31,7 +31,7 @@ export default function InteractiveMap({
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/outdoors-v11",
       center: [lng, lat],
-      zoom: zoom,
+      zoom: 5,
     });
     mapContainer.current.classList.add("map");
   });
@@ -63,7 +63,7 @@ export default function InteractiveMap({
     map.current.on("load", () => {
       // Add an image to use as a custom marker
       map.current.loadImage(
-        "https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png",
+        "/small-green-location-icon-png.png",
         (error, image) => {
           if (error) throw error;
           map.current.addImage("custom-marker", image);
@@ -89,6 +89,23 @@ export default function InteractiveMap({
           });
         }
       );
+    });
+
+    // Center the map on the coordinates of the icon click
+    map.current.on("click", "points", (e) => {
+      map.current.flyTo({
+        center: e.features[0].geometry.coordinates,
+      });
+    });
+
+    // Change the cursor to a pointer when it enters the icon.
+    map.current.on("mouseenter", "points", () => {
+      map.current.getCanvas().style.cursor = "pointer";
+    });
+
+    // Change it back to a pointer when it leaves.
+    map.current.on("mouseleave", "points", () => {
+      map.current.getCanvas().style.cursor = "";
     });
 
     // 	map.current.on('load', () => {

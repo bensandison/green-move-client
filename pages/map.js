@@ -16,9 +16,9 @@ export async function getStaticProps() {
 export default function MapPage({ allPlaces }) {
 	return (
 		<InteractiveMap
-			longitude={3}
-			latitude={55}
-			startingZoom={2}
+			longitude={1.7}
+			latitude={53.7}
+			startingZoom={10}
 			showAll={true}
 			allPlaces={allPlaces}
 		></InteractiveMap>
