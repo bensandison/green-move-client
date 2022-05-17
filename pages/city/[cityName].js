@@ -21,7 +21,7 @@ import SearchBar from "../../components/searchBar";
 import Mapbox from "../../components/map.js";
 import MultiLeafScore from "../../components/multiLeafScore";
 import greenMoveLogo from "../../public/green-move-logo.svg";
-import Property from "../../components/Property";
+import Property from "../../components/property";
 import Image from "next/image";
 
 export async function getStaticPaths() {
