@@ -81,7 +81,7 @@ export default function Home({ allPlaces, top5Places }) {
 				</Box>
 				<SearchBar
 					value="Enter city name"
-					containerProps={{ pb: 5 }}
+					containerProps={{ mb: 50 }}
 				></SearchBar>
 
 				<Box>
@@ -104,7 +104,8 @@ export default function Home({ allPlaces, top5Places }) {
 				</Box>
 
 				<AspectRatio
-					ratio={[1, 2 / 1, 2 / 1]}
+					mb={10}
+					ratio={[1, 1, 2 / 1]}
 					borderRadius="lg"
 					overflow="hidden"
 					boxShadow="xl"
