@@ -24,12 +24,18 @@ export default function SearchBar(props) {
 	}
 
 	return (
-		<InputGroup as="form" size="lg" onSubmit={handleSearchSubmit}>
+		<InputGroup
+			{...props.containerProps}
+			as="form"
+			size="lg"
+			onSubmit={handleSearchSubmit}
+		>
 			<Input
 				variant="outline"
 				placeholder={props.value}
 				value={searchQuery}
 				onChange={(e) => setSearchQuery(e.target.value)}
+				boxShadow="md"
 			/>
 			<InputRightElement>
 				<IconButton
