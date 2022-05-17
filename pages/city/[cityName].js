@@ -64,28 +64,28 @@ export async function getStaticProps({ params }) {
 	//get properties from rightmove:
 	let rightmoveProperties = null; //stores properties
 
-	let location = cityData.name.toUpperCase();
-	let locationCode = "";
-	for (let i = 0; i < location.length; i = i + 2) {
-		locationCode = locationCode + location.slice(i, i + 2) + "/";
-	}
+	// let location = cityData.name.toUpperCase();
+	// let locationCode = "";
+	// for (let i = 0; i < location.length; i = i + 2) {
+	// 	locationCode = locationCode + location.slice(i, i + 2) + "/";
+	// }
 
-	const resRightmoveCode = await fetch(
-		`https://www.rightmove.co.uk/typeAhead/uknostreet/${locationCode}`
-	);
+	// const resRightmoveCode = await fetch(
+	// 	`https://www.rightmove.co.uk/typeAhead/uknostreet/${locationCode}`
+	// );
 
-	const isJson = resRightmoveCode.headers
-		.get("content-type")
-		?.includes("application/json");
+	// const isJson = resRightmoveCode.headers
+	// 	.get("content-type")
+	// 	?.includes("application/json");
 
-	if (isJson && !resRightmoveCode.error) {
-		let locationIdData = await resRightmoveCode.json();
-		let locationId = locationIdData.typeAheadLocations[0].locationIdentifier;
-		const resProperties = await fetch(
-			`https://www.rightmove.co.uk/api/_search?locationIdentifier=${locationId}&numberOfPropertiesPerPage=24&radius=1.0&sortType=2&index=0&includeSSTC=false&viewType=LIST&channel=BUY&areaSizeUnit=sqft&currencyCode=GBP&isFetching=false&viewport=`
-		);
-		rightmoveProperties = await resProperties.json();
-	}
+	// if (isJson && !resRightmoveCode.error) {
+	// 	let locationIdData = await resRightmoveCode.json();
+	// 	let locationId = locationIdData.typeAheadLocations[0].locationIdentifier;
+	// 	const resProperties = await fetch(
+	// 		`https://www.rightmove.co.uk/api/_search?locationIdentifier=${locationId}&numberOfPropertiesPerPage=24&radius=1.0&sortType=2&index=0&includeSSTC=false&viewType=LIST&channel=BUY&areaSizeUnit=sqft&currencyCode=GBP&isFetching=false&viewport=`
+	// 	);
+	// 	rightmoveProperties = await resProperties.json();
+	// }
 
 	// Send data to cityData function:
 	return {
