@@ -20,12 +20,12 @@ const detailLeafSVG = (
 	</svg>
 );
 
-export default function Top5Card({ key, num, title, value }) {
+export default function Top5Card({ num, title, value }) {
 	const router = useRouter();
 
 	return (
 		<Box
-			key={key}
+			key={num}
 			as="button"
 			onClick={(e) => {
 				e.preventDefault();
