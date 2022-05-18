@@ -202,9 +202,12 @@ export default function CityData({
             </Stack>
           </Box>
           <Box mb={4}>
-            <Heading as="h2" size="md" mb={4} color="blackAlpha.800">
-              Qualities
-            </Heading>
+            <Box display="flex" justifyContent="space-between" mb={4}>
+              <Heading as="h2" size="md" color="blackAlpha.800">
+                Qualities
+              </Heading>
+              <Text ml={2} fontWeight="semibold" color="blackAlpha.700">*per 10,000 population</Text>
+            </Box>
             <SimpleGrid columns={[1, 2, 3]} spacing={4}>
               <QualityCard
                 title="Air Quality"
@@ -223,32 +226,32 @@ export default function CityData({
               />
               <QualityCard
                 title="Park average area"
-                value={`${cityData.park_average_area}m\u00B2`}
+                value={`${cityData.park_average_area} km\u00B2`}
                 percent={cityData.percentages.park_average_area}
               />
               <QualityCard
-                title="Parks"
-                value={`${cityData.park_population_ratio}/km\u00B2`}
+                title="Number of Parks*"
+                value={`${cityData.park_population_ratio}`}
                 percent={cityData.percentages.park_population_ratio}
               />
               <QualityCard
-                title="Bus stops"
+                title="Bus stops*"
                 value={`${cityData.bus_stop_population_ratio}`}
                 percent={cityData.percentages.bus_stop_population_ratio}
               />
               <QualityCard
-                title="Bicycle parking"
+                title="Bicycle parking*"
                 value={`${cityData.bicycle_parking_population_ratio}`}
                 percent={cityData.percentages.bicycle_parking_population_ratio}
               />
               <QualityCard
                 title="Walking routes"
-                value={`${cityData.walking_routes_ratio}/m\u00B2`}
+                value={`${cityData.walking_routes_ratio}/km\u00B2`}
                 percent={cityData.percentages.walking_routes_ratio}
               />
               <QualityCard
                 title="Cycling routes"
-                value={`${cityData.cycling_routes_ratio}/m\u00B2`}
+                value={`${cityData.cycling_routes_ratio}/km\u00B2`}
                 percent={cityData.percentages.cycling_routes_ratio}
               />
             </SimpleGrid>
@@ -262,25 +265,25 @@ export default function CityData({
                 emojiSymbol="📏"
                 emojiLabel="Straight Ruler"
                 title="Area"
-                value={`${cityData.area}km\u00B2`}
+                value={`${cityData.area} km\u00B2`}
               />
               <PropertyCard
                 emojiSymbol="🌳"
                 emojiLabel="Deciduous Tree"
                 title="Greenspace Area"
-                value={`${cityData.greenspace_area}km\u00B2`}
+                value={`${cityData.greenspace_area} km\u00B2`}
               />
               <PropertyCard
                 emojiSymbol="🥾"
                 emojiLabel="Hiking Boot"
                 title="Walking routes"
-                value={`${cityData.walking_routes_length}m`}
+                value={`${cityData.walking_routes_length} km\u00B2`}
               />
               <PropertyCard
                 emojiSymbol="🚴"
                 emojiLabel="Person Biking"
                 title="Cycling routes"
-                value={`${cityData.cycling_routes_length}m`}
+                value={`${cityData.cycling_routes_length} km\u00B2`}
               />
               <PropertyCard
                 emojiSymbol="🧍"
