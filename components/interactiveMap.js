@@ -107,13 +107,6 @@ export default function InteractiveMap({
       map.current.getCanvas().style.cursor = "";
     });
 
-    //popup
-    const Popup = ({}) => (
-      <div className="popup">
-        <p>test</p>
-      </div>
-    );
-
     // 	map.current.on('load', () => {
 
     // 	map.current.addSource('boundries', {
