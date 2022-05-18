@@ -10,9 +10,7 @@ export default function Property({
 }) {
   return (
     <Box borderWidth={2} borderRadius="md" p={3}>
-      {/* <Box boxSize="sm"> */}
       <Image src={imageSrc} alt="image of property" />
-      {/* </Box> */}
       <Text fontSize="lg" fontWeight="semibold">
         {location}
       </Text>
