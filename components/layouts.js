@@ -1,12 +1,12 @@
-import { Container } from "@chakra-ui/react";
+import { Box, Container } from "@chakra-ui/react";
 
 // Shared layout between multiple pages:
 export default function Layout({ children }) {
 	return (
 		<>
-			<Container as="main" maxW="container.lg">
+			<Box px={4} as="main">
 				{children}
-			</Container>
+			</Box>
 		</>
 	);
 }

@@ -70,7 +70,7 @@ export default function Mapbox({
         type: "line",
         source: "boundary",
         paint: {
-          "line-color": "#007510",
+          "line-color": "#A6D388",
           "line-width": 2,
         },
       });
@@ -79,7 +79,7 @@ export default function Mapbox({
         type: "fill",
         source: "boundary",
         paint: {
-          "fill-color": "#1eeb3a",
+          "fill-color": "#77B255",
           "fill-opacity": 0.25,
         },
       });
