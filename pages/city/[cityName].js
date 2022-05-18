@@ -137,7 +137,7 @@ export default function CityData({
   }
 
   return (
-    <Flex gap={4} maxW="container.md" direction="column" py={4} m="auto">
+    <Flex gap={4} maxW="container.md" direction="column" py={4} m="auto" px={[4,10,10]}>
       <Box
         as="button"
         mr="auto"
@@ -154,7 +154,7 @@ export default function CityData({
         ></Image>
       </Box>
 
-      <Box>
+      <Box mb={4}>
         <SearchBar
           value={cityData ? cityData.name : "Enter City Name"}
         ></SearchBar>
@@ -168,8 +168,8 @@ export default function CityData({
       </Box>
       {cityData && (
         <>
-          <Box>
-            <Heading size="md" fontWeight="semibold" pb={[1, 2, 2]}>
+          <Box mb={8}>
+            <Heading as="h4" size="md" color="blackAlpha.800" pb={[1, 2, 2]} mb={1}>
               {`${cityData.name}, ${cityData.county}, ${cityData.country}`}
             </Heading>
             <AspectRatio
@@ -188,22 +188,24 @@ export default function CityData({
             </AspectRatio>
           </Box>
 
-          <Box>
-            <Heading fontWeight="semibold" fontSize="lg">
-              Enviromental Rating
+          <Box mb={6}>
+            <Heading as="h1" size="lg" color="blackAlpha.900">
+              Environmental Rating
             </Heading>
-            <Stack mt="2" direction="row" spacing={1}>
+            <Stack mt={4} direction="row" spacing={1}>
               <MultiLeafScore score={cityData.rating}></MultiLeafScore>
-              <Text fontWeight="semibold" fontSize="3xl" alignSelf="flex-end">
-                {cityData.rating}
-              </Text>
+              <Box>
+                <Text fontWeight="semibold" fontSize="3xl" alignSelf="flex-end" ml="12px">
+                  {cityData.rating}
+                </Text>
+              </Box>
             </Stack>
           </Box>
-          <Box>
-            <Heading fontWeight="medium" fontSize="lg">
-              Qualities:
+          <Box mb={4}>
+            <Heading as="h2" size="md" mb={4} color="blackAlpha.800">
+              Qualities
             </Heading>
-            <SimpleGrid mt="2" columns={[2, 3, 4]} spacing={4}>
+            <SimpleGrid columns={[1, 2, 3]} spacing={4}>
               <QualityCard
                 title="Air Quality"
                 value={cityData.air_quality_label}
@@ -212,81 +214,109 @@ export default function CityData({
               <QualityCard
                 title="Population Density"
                 value={`${cityData.population_density}/km\u00B2`}
+                percent={cityData.percentages.population_density}
               />
               <QualityCard
-                title="Greenspace Ratio"
+                title="Greenspace"
                 value={`${cityData.greenspace_area_ratio}/km\u00B2`}
-              />
-              <QualityCard
-                title="Park Ratio"
-                value={`${cityData.park_area_ratio}/km\u00B2`}
+                percent={cityData.percentages.greenspace_area_ratio}
               />
               <QualityCard
                 title="Park average area"
                 value={`${cityData.park_average_area}m\u00B2`}
+                percent={cityData.percentages.park_average_area}
               />
               <QualityCard
-                title="People per park"
-                value={`${cityData.park_population_ratio}/1km\u00B2`}
+                title="Parks"
+                value={`${cityData.park_population_ratio}/km\u00B2`}
+                percent={cityData.percentages.park_population_ratio}
               />
               <QualityCard
-                title="People per bus stop"
-                value={`${cityData.bus_stop_population_ratio}/1`}
+                title="Bus stops"
+                value={`${cityData.bus_stop_population_ratio}`}
+                percent={cityData.percentages.bus_stop_population_ratio}
               />
               <QualityCard
-                title="People per bicycle parking"
-                value={`${cityData.bicycle_parking_population_ratio}/1`}
+                title="Bicycle parking"
+                value={`${cityData.bicycle_parking_population_ratio}`}
+                percent={cityData.percentages.bicycle_parking_population_ratio}
               />
               <QualityCard
-                title="Walking routes ratio"
+                title="Walking routes"
                 value={`${cityData.walking_routes_ratio}/m\u00B2`}
+                percent={cityData.percentages.walking_routes_ratio}
               />
               <QualityCard
-                title="Cycling routes ratio"
+                title="Cycling routes"
                 value={`${cityData.cycling_routes_ratio}/m\u00B2`}
+                percent={cityData.percentages.cycling_routes_ratio}
               />
             </SimpleGrid>
           </Box>
-          <Box>
-            <Heading fontWeight="medium" fontSize="lg">
-              Properties:
+          <Box mb={4}>
+            <Heading as="h2" size="md" mb={4} color="blackAlpha.800">
+              Properties
             </Heading>
-            <SimpleGrid mt="2" columns={[2, 3, 3]} spacing={4}>
-              <PropertyCard title="Population" value={cityData.population} />
-              <PropertyCard title="Area" value={`${cityData.area}km\u00B2`} />
+            <SimpleGrid columns={[1, 2, 3]} spacing={4}>
               <PropertyCard
+                emojiSymbol="📏"
+                emojiLabel="Straight Ruler"
+                title="Area"
+                value={`${cityData.area}km\u00B2`}
+              />
+              <PropertyCard
+                emojiSymbol="🌳"
+                emojiLabel="Deciduous Tree"
                 title="Greenspace Area"
                 value={`${cityData.greenspace_area}km\u00B2`}
               />
               <PropertyCard
-                title="Number of Parks"
+                emojiSymbol="🥾"
+                emojiLabel="Hiking Boot"
+                title="Walking routes"
+                value={`${cityData.walking_routes_length}m`}
+              />
+              <PropertyCard
+                emojiSymbol="🚴"
+                emojiLabel="Person Biking"
+                title="Cycling routes"
+                value={`${cityData.cycling_routes_length}m`}
+              />
+              <PropertyCard
+                emojiSymbol="🧍"
+                emojiLabel="Person Standing"
+                title="Population"
+                value={cityData.population}
+              />
+              <PropertyCard
+                emojiSymbol="🦖"
+                emojiLabel="T-Rex"
+                title="Parks"
                 value={cityData.park_quantity}
               />
               <PropertyCard
+                emojiSymbol="🚗"
+                emojiLabel="Automobile"
                 title="Registered Vehicle's"
                 value={cityData.vehicle_quantity}
               />
               <PropertyCard
+                emojiSymbol="🚏"
+                emojiLabel="Bus Stop"
                 title="Bus stops"
                 value={cityData.bus_stop_quantity}
               />
               <PropertyCard
+                emojiSymbol="🚲"
+                emojiLabel="Bicycle"
                 title="Bicycle Parking"
                 value={cityData.bicycle_parking_quantity}
-              />
-              <PropertyCard
-                title="Walking routes length"
-                value={`${cityData.walking_routes_length}m`}
-              />
-              <PropertyCard
-                title="Cycling routes length"
-                value={`${cityData.cycling_routes_length}m`}
               />
             </SimpleGrid>
           </Box>
           <Box>
-            <Heading fontWeight="medium" fontSize="lg">
-              Property Listings:
+            <Heading as="h2" size="md" mb={4} color="blackAlpha.800">
+              Property Listings
             </Heading>
             <SimpleGrid mt="2" columns={[1, 2, 3]} spacing={4}>
               {propertyListings}
