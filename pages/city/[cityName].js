@@ -130,6 +130,7 @@ export default function CityData({
             bedrooms={item.bedrooms}
             bathrooms={item.bathrooms}
             imageSrc={item.propertyImages.mainImageSrc}
+            propertyType={item.propertySubType}
           />
         );
       }
@@ -137,7 +138,14 @@ export default function CityData({
   }
 
   return (
-    <Flex gap={4} maxW="container.md" direction="column" py={4} m="auto" px={[4,10,10]}>
+    <Flex
+      gap={4}
+      maxW="container.md"
+      direction="column"
+      py={4}
+      m="auto"
+      px={[4, 10, 10]}
+    >
       <Box
         as="button"
         mr="auto"
@@ -169,7 +177,13 @@ export default function CityData({
       {cityData && (
         <>
           <Box mb={8}>
-            <Heading as="h4" size="md" color="blackAlpha.800" pb={[1, 2, 2]} mb={1}>
+            <Heading
+              as="h4"
+              size="md"
+              color="blackAlpha.800"
+              pb={[1, 2, 2]}
+              mb={1}
+            >
               {`${cityData.name}, ${cityData.county}, ${cityData.country}`}
             </Heading>
             <AspectRatio
@@ -195,7 +209,12 @@ export default function CityData({
             <Stack mt={4} direction="row" spacing={1}>
               <MultiLeafScore score={cityData.rating}></MultiLeafScore>
               <Box>
-                <Text fontWeight="semibold" fontSize="3xl" alignSelf="flex-end" ml="12px">
+                <Text
+                  fontWeight="semibold"
+                  fontSize="3xl"
+                  alignSelf="flex-end"
+                  ml="12px"
+                >
                   {cityData.rating}
                 </Text>
               </Box>
@@ -206,7 +225,9 @@ export default function CityData({
               <Heading as="h2" size="md" color="blackAlpha.800">
                 Qualities
               </Heading>
-              <Text ml={2} fontWeight="semibold" color="blackAlpha.700">*per 10,000 population</Text>
+              <Text ml={2} fontWeight="semibold" color="blackAlpha.700">
+                *per 10,000 population
+              </Text>
             </Box>
             <SimpleGrid columns={[1, 2, 3]} spacing={4}>
               <QualityCard
