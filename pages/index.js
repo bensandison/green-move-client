@@ -103,21 +103,26 @@ export default function Home({ allPlaces, top5Places }) {
 					</SimpleGrid>
 				</Box>
 
-				<AspectRatio
-					mb={10}
-					ratio={[1, 1, 2 / 1]}
-					borderRadius="lg"
-					overflow="hidden"
-					boxShadow="xl"
-				>
-					<InteractiveMap
-						longitude={-3}
-						latitude={53}
-						startingZoom={2}
-						showAll={true}
-						allPlaces={allPlaces}
-					></InteractiveMap>
-				</AspectRatio>
+				<Box>
+					<Heading as="h3" fontWeight="semibold" fontSize="2xl">
+						Interactive Map
+					</Heading>
+					<AspectRatio
+						mb={10}
+						ratio={[1, 1, 2 / 1]}
+						borderRadius="lg"
+						overflow="hidden"
+						boxShadow="xl"
+					>
+						<InteractiveMap
+							longitude={-3}
+							latitude={53}
+							startingZoom={2}
+							showAll={true}
+							allPlaces={allPlaces}
+						></InteractiveMap>
+					</AspectRatio>
+				</Box>
 			</Flex>
 		</>
 	);
