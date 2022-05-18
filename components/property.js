@@ -34,11 +34,11 @@ export default function Property({
           </Flex>
         </Flex>
 
-        <Text fontSize="md" fontWeight="bold" noOfLines={2}>
+        <Text fontSize="md" fontWeight="semibold" noOfLines={2}>
           {summary}
         </Text>
 
-        <Text fontSize="sm" fontWeight="semibold" noOfLines={3}>
+        <Text fontSize="sm" noOfLines={3}>
           £{price.toLocaleString("en-US")}
         </Text>
       </Box>
