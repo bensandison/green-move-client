@@ -4,7 +4,9 @@ import { Box, Container } from "@chakra-ui/react";
 export default function Layout({ children }) {
 	return (
 		<>
-			<Box as="main">{children}</Box>
+			<Box px={4} as="main">
+				{children}
+			</Box>
 		</>
 	);
 }
