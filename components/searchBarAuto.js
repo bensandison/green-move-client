@@ -220,14 +220,13 @@ export default function SearchBarAuto({ suggestions, ...props }) {
 								key={i}
 								borderWidth={2}
 								borderRadius={"md"}
-								p={1.5}
-								py={2}
-								pl={3}
+								py={2.5}
+								pl={4}
 								boxShadow={shadow}
 								_hover={{ boxShadow: "outline" }}
 								_focusVisible={{ boxShadow: "outline" }}
 							>
-								<Text textAlign="left" fontSize="xl" noOfLines={1}>
+								<Text textAlign="left" fontSize="lg" noOfLines={1}>
 									{item}
 								</Text>
 							</Box>
