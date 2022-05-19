@@ -25,6 +25,7 @@ export default function Top5Card({ num, title, value }) {
 
 	return (
 		<Box
+			key={num}
 			as="button"
 			onClick={(e) => {
 				e.preventDefault();

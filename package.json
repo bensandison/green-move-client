@@ -14,6 +14,7 @@
 		"@emotion/styled": "^11.8.1",
 		"a11y-react-emoji": "^1.2.0",
 		"framer-motion": "^6.2.8",
+		"fuse.js": "^6.6.2",
 		"mapbox": "^1.0.0-beta10",
 		"mapbox-gl": "^2.7.1",
 		"next": "12.1.0",
