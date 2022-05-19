@@ -1,4 +1,3 @@
-import Head from "next/head";
 import {
 	Flex,
 	Box,
@@ -48,28 +47,7 @@ export default function Home({ allPlaces, top5Places, cityNames }) {
 
 	return (
 		<>
-			<Head>
-				<title>GreenMove</title>
-				<meta name="description" content="GreenMove..." />
-				<link rel="icon" href="/favicon.ico" />
-			</Head>
 			<Flex gap={4} maxW="container.md" direction="column" py={4} mx="auto">
-				<Box
-					as="button"
-					mr="auto"
-					onClick={(e) => {
-						e.preventDefault();
-						router.push("/");
-					}}
-				>
-					<Image
-						priority
-						src={greenMoveLogo}
-						alt="leaf-logo"
-						height="25"
-						width="180"
-					></Image>
-				</Box>
 				<Box my={20} mx={5}>
 					<Flex
 						justifyContent="center"
@@ -77,11 +55,8 @@ export default function Home({ allPlaces, top5Places, cityNames }) {
 						px="auto"
 						flexWrap="wrap"
 					>
-						<Heading as="h1" pr="3" fontSize={[30, 40, 50]} textAlign="center">
-							Live Green.
-						</Heading>
-						<Heading as="h1" fontSize={[30, 40, 50]} textAlign="center">
-							Move Green.
+						<Heading as="h1" fontSize={[30, 40, 50]} fontWeight="extrabold" textAlign="center" textTransform="uppercase">
+							Live Green. Move Green.
 						</Heading>
 					</Flex>
 					<Heading pt={3} textAlign="center" fontSize={[18, 22, 25]}>
@@ -91,8 +66,8 @@ export default function Home({ allPlaces, top5Places, cityNames }) {
 				</Box>
 				<SearchBarAuto suggestions={cityNames}></SearchBarAuto>
 
-				<Box>
-					<Heading as="h3" fontWeight="semibold" fontSize="2xl">
+				<Box mt={12} mb={6}>
+					<Heading as="h3" fontWeight="semibold" fontSize="2xl" mb={4}>
 						Top 5 Cities
 					</Heading>
 					<SimpleGrid mt="2" columns={[1, 2, 5]} spacing={4}>
@@ -111,7 +86,7 @@ export default function Home({ allPlaces, top5Places, cityNames }) {
 				</Box>
 
 				<Box>
-					<Heading as="h3" fontWeight="semibold" fontSize="2xl">
+					<Heading as="h3" fontWeight="semibold" fontSize="2xl" mb={4}>
 						Interactive Map
 					</Heading>
 					<AspectRatio
