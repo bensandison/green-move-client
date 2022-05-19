@@ -59,6 +59,7 @@ export default function SearchBarAuto({ suggestions, ...props }) {
 		// Set searching for loading animation:
 		setIsSearching(true);
 		setSearchQuery(item);
+		setIsFocused(false);
 
 		// Send to city domain:
 		router.push(`/city/${item.toLowerCase()}`).then(() => {
@@ -206,6 +207,9 @@ export default function SearchBarAuto({ suggestions, ...props }) {
 						const shadow = suggestionsIndex === i ? "outline" : "";
 						return (
 							<Box
+								onTouchEnd={(e) => {
+									handleSuggestionSelected(e, item);
+								}}
 								onClick={(e) => {
 									handleSuggestionSelected(e, item);
 								}}
