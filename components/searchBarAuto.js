@@ -37,6 +37,7 @@ export default function SearchBarAuto({ suggestions, ...props }) {
 	const [searchQuery, setSearchQuery] = useState("");
 
 	function handleOnChange(e) {
+		setIsFocused(true);
 		setSearchQuery(e.target.value);
 		setSuggestionsIndex(-1);
 
@@ -60,7 +61,9 @@ export default function SearchBarAuto({ suggestions, ...props }) {
 		setSearchQuery(item);
 
 		// Send to city domain:
-		router.push(`/city/${item.toLowerCase()}`);
+		router.push(`/city/${item.toLowerCase()}`).then(() => {
+			setIsSearching(false);
+		});
 	}
 
 	function handleSearchSubmit() {
@@ -76,15 +79,18 @@ export default function SearchBarAuto({ suggestions, ...props }) {
 
 			setSearchQuery(fuseRes[0].item);
 			setIsSearching(true);
+			setIsFocused(false);
 
 			// Change query to lower case:
 			// Send user to route of new city:
-			router.push(`/city/${fuseRes[0].item.toLowerCase()}`);
+			router.push(`/city/${fuseRes[0].item.toLowerCase()}`).then(() => {
+				setIsSearching(false);
+			});
 		}
 	}
 
 	function handleKeyDown(e) {
-		if (e.key === "Enter") handleEnterKey(e);
+		if (e.key === "Enter" || e.key === "Tab") handleEnterKey(e);
 
 		// Return if no suggestions are visible
 		if (!filteredSuggestions) return;
@@ -123,9 +129,12 @@ export default function SearchBarAuto({ suggestions, ...props }) {
 		// Set searching for loading animation:
 		setIsSearching(true);
 		setSearchQuery(suggestionQuery);
+		setIsFocused(false);
 
 		// Send to city domain:
-		router.push(`/city/${suggestionQuery.toLowerCase()}`);
+		router.push(`/city/${suggestionQuery.toLowerCase()}`).then(() => {
+			setIsSearching(false);
+		});
 	}
 
 	function checkError() {

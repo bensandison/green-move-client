@@ -17,12 +17,12 @@ import {
 } from "@chakra-ui/react";
 import PropertyCard from "../../components/propertyCard";
 import QualityCard from "../../components/qualityCard";
-import SearchBar from "../../components/searchBar";
 import Mapbox from "../../components/map.js";
 import MultiLeafScore from "../../components/multiLeafScore";
 import greenMoveLogo from "../../public/green-move-logo.svg";
 import Property from "../../components/property";
 import Image from "next/image";
+import SearchBarAuto from "../../components/searchBarAuto";
 
 export async function getStaticPaths() {
 	// Get city names from API:
@@ -99,12 +99,21 @@ export async function getStaticProps({ params }) {
 		rightmoveProperties = await resProperties.json();
 	}
 
+	// Get data for all cities:
+	let allPlaces = await fetch("https://api.greenmove.io/places/all");
+	allPlaces = await allPlaces.json();
+	allPlaces = allPlaces.data;
+	const cityNames = allPlaces.map((city, i) => {
+		return city.name;
+	});
+
 	// Send data to cityData function:
 	return {
 		props: {
 			cityData: cityData,
 			cityBoundary: cityBoundary,
 			rightmoveProperties: rightmoveProperties,
+			cityNames: cityNames,
 		},
 	};
 }
@@ -113,6 +122,7 @@ export default function CityData({
 	cityData,
 	cityBoundary,
 	rightmoveProperties,
+	cityNames,
 }) {
 	const router = useRouter();
 
@@ -155,9 +165,7 @@ export default function CityData({
 			</Box>
 
 			<Box mb={4}>
-				<SearchBar
-					value={cityData ? cityData.name : "Enter City Name"}
-				></SearchBar>
+				<SearchBarAuto suggestions={cityNames}></SearchBarAuto>
 				{!cityData && (
 					<Alert mt={2} status="error">
 						<AlertIcon></AlertIcon>
