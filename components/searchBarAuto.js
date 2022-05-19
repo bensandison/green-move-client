@@ -9,9 +9,10 @@ import {
 	Spinner,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/router";
 import Fuse from "fuse.js";
+import { useFocusWithin } from "@react-aria/interactions";
 
 export default function SearchBarAuto({ suggestions, ...props }) {
 	if (!suggestions) suggestions = []; // Error handling
@@ -35,6 +36,17 @@ export default function SearchBarAuto({ suggestions, ...props }) {
 	const [suggestionsIndex, setSuggestionsIndex] = useState(-1);
 	const [filteredSuggestions, setFilteredSuggestions] = useState([]);
 	const [searchQuery, setSearchQuery] = useState("");
+
+	// Focus Within
+	let { focusWithinProps } = useFocusWithin({
+		onFocusWithin: () => {
+			setIsFocused(true);
+		},
+		onBlurWithin: () => {
+			setIsFocused(false);
+			setSuggestionsIndex(-1);
+		},
+	});
 
 	function handleOnChange(e) {
 		setIsFocused(true);
@@ -91,7 +103,7 @@ export default function SearchBarAuto({ suggestions, ...props }) {
 	}
 
 	function handleKeyDown(e) {
-		if (e.key === "Enter" || e.key === "Tab") handleEnterKey(e);
+		if (e.key === "Enter") handleEnterKey(e);
 
 		// Return if no suggestions are visible
 		if (!filteredSuggestions) return;
@@ -149,16 +161,7 @@ export default function SearchBarAuto({ suggestions, ...props }) {
 	}
 
 	return (
-		<Box
-			onFocus={() => {
-				setIsFocused(true);
-			}}
-			onBlur={() => {
-				setIsFocused(false);
-				setSuggestionsIndex(-1);
-			}}
-			position="relative"
-		>
+		<Box position="relative" {...focusWithinProps}>
 			{isError && <Text color="red">Invalid City Name</Text>}
 
 			<InputGroup
@@ -169,7 +172,7 @@ export default function SearchBarAuto({ suggestions, ...props }) {
 				}}
 			>
 				<Input
-					placeholder={searchQuery ? searchQuery : "Search A City..."}
+					placeholder={searchQuery ? searchQuery : "Find A City..."}
 					value={searchQuery}
 					onChange={handleOnChange}
 					variant="outline"
@@ -217,14 +220,13 @@ export default function SearchBarAuto({ suggestions, ...props }) {
 								key={i}
 								borderWidth={2}
 								borderRadius={"md"}
-								p={1.5}
 								py={2}
-								pl={3}
+								pl={4}
 								boxShadow={shadow}
 								_hover={{ boxShadow: "outline" }}
 								_focusVisible={{ boxShadow: "outline" }}
 							>
-								<Text textAlign="left" fontSize="xl" noOfLines={1}>
+								<Text textAlign="left" fontSize="lg" noOfLines={1}>
 									{item}
 								</Text>
 							</Box>

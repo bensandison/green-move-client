@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useRouter } from "next/router";
+import Head from 'next/head';
 import { useEffect, useState } from "react";
 import {
 	Flex,
@@ -19,9 +19,7 @@ import PropertyCard from "../../components/propertyCard";
 import QualityCard from "../../components/qualityCard";
 import Mapbox from "../../components/map.js";
 import MultiLeafScore from "../../components/multiLeafScore";
-import greenMoveLogo from "../../public/green-move-logo.svg";
 import Property from "../../components/property";
-import Image from "next/image";
 import SearchBarAuto from "../../components/searchBarAuto";
 
 export async function getStaticPaths() {
@@ -124,7 +122,7 @@ export default function CityData({
 	rightmoveProperties,
 	cityNames,
 }) {
-	const router = useRouter();
+
 
 	// If theres an error with properties:
 	let propertyListings = <Text>Null</Text>;
@@ -134,6 +132,7 @@ export default function CityData({
 			if (item.propertyImages.mainImageSrc) {
 				return (
 					<Property
+						key={i}
 						location={item.displayAddress}
 						summary={item.summary}
 						price={item.price.amount}
@@ -148,22 +147,9 @@ export default function CityData({
 
 	return (
 		<Flex gap={4} maxW="container.md" direction="column" py={4} m="auto">
-			<Box
-				as="button"
-				mr="auto"
-				onClick={(e) => {
-					e.preventDefault();
-					router.push("/");
-				}}
-			>
-				<Image
-					src={greenMoveLogo}
-					alt="leaf-logo"
-					height="25"
-					width="180"
-				></Image>
-			</Box>
-
+			<Head>
+				<title>GreenMove.io - {`${cityData.name}, ${cityData.county}, ${cityData.country}`}</title>
+			</Head>
 			<Box mb={4}>
 				<SearchBarAuto suggestions={cityNames}></SearchBarAuto>
 				{!cityData && (
@@ -221,9 +207,14 @@ export default function CityData({
 						</Stack>
 					</Box>
 					<Box mb={4}>
-						<Heading as="h2" size="md" mb={4} color="blackAlpha.800">
-							Qualities
-						</Heading>
+						<Box display="flex" justifyContent="space-between">
+							<Heading as="h2" size="md" mb={4} color="blackAlpha.800">
+								Qualities
+							</Heading>
+							<Text fontSize="sm">
+								*per 10,000 population
+							</Text>
+						</Box>
 						<SimpleGrid columns={[1, 2, 3]} spacing={4}>
 							<QualityCard
 								title="Air Quality"
@@ -241,34 +232,34 @@ export default function CityData({
 								percent={cityData.percentages.greenspace_area_ratio}
 							/>
 							<QualityCard
-								title="Park average area"
-								value={`${cityData.park_average_area}m\u00B2`}
-								percent={cityData.percentages.park_average_area}
-							/>
-							<QualityCard
-								title="Parks"
-								value={`${cityData.park_population_ratio}/km\u00B2`}
-								percent={cityData.percentages.park_population_ratio}
-							/>
-							<QualityCard
-								title="Bus stops"
-								value={`${cityData.bus_stop_population_ratio}`}
-								percent={cityData.percentages.bus_stop_population_ratio}
-							/>
-							<QualityCard
-								title="Bicycle parking"
-								value={`${cityData.bicycle_parking_population_ratio}`}
-								percent={cityData.percentages.bicycle_parking_population_ratio}
-							/>
-							<QualityCard
 								title="Walking routes"
-								value={`${cityData.walking_routes_ratio}/m\u00B2`}
+								value={`${cityData.walking_routes_ratio}/km\u00B2`}
 								percent={cityData.percentages.walking_routes_ratio}
 							/>
 							<QualityCard
 								title="Cycling routes"
-								value={`${cityData.cycling_routes_ratio}/m\u00B2`}
+								value={`${cityData.cycling_routes_ratio}/km\u00B2`}
 								percent={cityData.percentages.cycling_routes_ratio}
+							/>
+							<QualityCard
+								title="Park average area"
+								value={`${cityData.park_average_area}km\u00B2`}
+								percent={cityData.percentages.park_average_area}
+							/>
+							<QualityCard
+								title="Parks*"
+								value={`${cityData.park_population_ratio}`}
+								percent={cityData.percentages.park_population_ratio}
+							/>
+							<QualityCard
+								title="Bus stops*"
+								value={`${cityData.bus_stop_population_ratio}`}
+								percent={cityData.percentages.bus_stop_population_ratio}
+							/>
+							<QualityCard
+								title="Bicycle parking*"
+								value={`${cityData.bicycle_parking_population_ratio}`}
+								percent={cityData.percentages.bicycle_parking_population_ratio}
 							/>
 						</SimpleGrid>
 					</Box>
@@ -293,13 +284,13 @@ export default function CityData({
 								emojiSymbol="🥾"
 								emojiLabel="Hiking Boot"
 								title="Walking routes"
-								value={`${cityData.walking_routes_length}m`}
+								value={`${cityData.walking_routes_length}km`}
 							/>
 							<PropertyCard
 								emojiSymbol="🚴"
 								emojiLabel="Person Biking"
 								title="Cycling routes"
-								value={`${cityData.cycling_routes_length}m`}
+								value={`${cityData.cycling_routes_length}km`}
 							/>
 							<PropertyCard
 								emojiSymbol="🧍"
@@ -333,14 +324,16 @@ export default function CityData({
 							/>
 						</SimpleGrid>
 					</Box>
-					<Box>
-						<Heading as="h2" size="md" mb={4} color="blackAlpha.800">
-							Property Listings
-						</Heading>
-						<SimpleGrid mt="2" columns={[1, 2, 3]} spacing={4}>
-							{propertyListings}
-						</SimpleGrid>
-					</Box>
+					{propertyListings.length >= 1 &&
+						<Box>
+							<Heading as="h2" size="md" mb={4} color="blackAlpha.800">
+								Property Listings
+							</Heading>
+							<SimpleGrid mt="2" columns={[1, 2, 3]} spacing={4}>
+								{propertyListings}
+							</SimpleGrid>
+						</Box>
+					}
 				</>
 			)}
 		</Flex>
