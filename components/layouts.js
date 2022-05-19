@@ -41,6 +41,7 @@ export default function Layout({ children }) {
 				/>
 				<meta name="msapplication-TileColor" content="#ffffff" />
 				<meta name="theme-color" content="#ffffff" />
+				<script async defer data-website-id="d6cd83a0-e485-4dcc-91f0-674c1c6e75a1" src="https://greenmove-stats.herokuapp.com/umami.js"></script>
 			</Head>
 			<Box maxW="container.md" py={4} m="auto">
 				<Box
