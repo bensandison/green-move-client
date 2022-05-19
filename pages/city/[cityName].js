@@ -134,6 +134,7 @@ export default function CityData({
 			if (item.propertyImages.mainImageSrc) {
 				return (
 					<Property
+						key={i}
 						location={item.displayAddress}
 						summary={item.summary}
 						price={item.price.amount}
