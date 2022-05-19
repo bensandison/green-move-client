@@ -12,8 +12,20 @@ import { SearchIcon } from "@chakra-ui/icons";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import Fuse from "fuse.js";
+import { useFocusWithin } from "@react-aria/interactions";
 
 export default function SearchBarAuto({ suggestions, ...props }) {
+	// Focus Within
+	const { focusProps } = useFocusWithin({
+		onFocus: () => {
+			setIsFocused(true);
+		},
+		onBlur: () => {
+			setIsFocused(false);
+			setSuggestionsIndex(-1);
+		},
+	});
+
 	if (!suggestions) suggestions = []; // Error handling
 
 	// Setup fuse search:
@@ -149,16 +161,7 @@ export default function SearchBarAuto({ suggestions, ...props }) {
 	}
 
 	return (
-		<Box
-			onFocus={() => {
-				setIsFocused(true);
-			}}
-			onBlur={() => {
-				setIsFocused(false);
-				setSuggestionsIndex(-1);
-			}}
-			position="relative"
-		>
+		<Box position="relative" {...focusProps}>
 			{isError && <Text color="red">Invalid City Name</Text>}
 
 			<InputGroup
