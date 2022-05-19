@@ -16,6 +16,7 @@ import { useRouter } from "next/router";
 import greenMoveLogo from "../public/green-move-logo.svg";
 import InteractiveMap from "../components/interactiveMap";
 import Top5Card from "../components/top5card";
+import SearchBarAuto from "../components/searchBarAuto";
 
 export async function getStaticProps() {
 	//get data for all cities
@@ -30,10 +31,20 @@ export async function getStaticProps() {
 
 	const top5Places = sortedPlaces.slice(0, 5);
 
-	return { props: { allPlaces: allPlaces, top5Places: top5Places } };
+	const cityNames = allPlaces.map((city, i) => {
+		return city.name;
+	});
+
+	return {
+		props: {
+			allPlaces: allPlaces,
+			top5Places: top5Places,
+			cityNames: cityNames,
+		},
+	};
 }
 
-export default function Home({ allPlaces, top5Places }) {
+export default function Home({ allPlaces, top5Places, cityNames }) {
 	const router = useRouter();
 
 	return (
@@ -79,10 +90,7 @@ export default function Home({ allPlaces, top5Places }) {
 						greenest place to live.
 					</Heading>
 				</Box>
-				<SearchBar
-					value="Enter city name"
-					containerProps={{ mb: 50 }}
-				></SearchBar>
+				<SearchBarAuto suggestions={cityNames}></SearchBarAuto>
 
 				<Box>
 					<Heading as="h3" fontWeight="semibold" fontSize="2xl">
