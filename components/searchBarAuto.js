@@ -9,23 +9,12 @@ import {
 	Spinner,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/router";
 import Fuse from "fuse.js";
 import { useFocusWithin } from "@react-aria/interactions";
 
 export default function SearchBarAuto({ suggestions, ...props }) {
-	// Focus Within
-	const { focusProps } = useFocusWithin({
-		onFocus: () => {
-			setIsFocused(true);
-		},
-		onBlur: () => {
-			setIsFocused(false);
-			setSuggestionsIndex(-1);
-		},
-	});
-
 	if (!suggestions) suggestions = []; // Error handling
 
 	// Setup fuse search:
@@ -47,6 +36,17 @@ export default function SearchBarAuto({ suggestions, ...props }) {
 	const [suggestionsIndex, setSuggestionsIndex] = useState(-1);
 	const [filteredSuggestions, setFilteredSuggestions] = useState([]);
 	const [searchQuery, setSearchQuery] = useState("");
+
+	// Focus Within
+	let { focusWithinProps } = useFocusWithin({
+		onFocusWithin: () => {
+			setIsFocused(true);
+		},
+		onBlurWithin: () => {
+			setIsFocused(false);
+			setSuggestionsIndex(-1);
+		},
+	});
 
 	function handleOnChange(e) {
 		setIsFocused(true);
@@ -161,7 +161,7 @@ export default function SearchBarAuto({ suggestions, ...props }) {
 	}
 
 	return (
-		<Box position="relative" {...focusProps}>
+		<Box position="relative" {...focusWithinProps}>
 			{isError && <Text color="red">Invalid City Name</Text>}
 
 			<InputGroup
@@ -172,7 +172,7 @@ export default function SearchBarAuto({ suggestions, ...props }) {
 				}}
 			>
 				<Input
-					placeholder={searchQuery ? searchQuery : "Search A City..."}
+					placeholder={searchQuery ? searchQuery : "Find A City..."}
 					value={searchQuery}
 					onChange={handleOnChange}
 					variant="outline"
