@@ -220,7 +220,7 @@ export default function SearchBarAuto({ suggestions, ...props }) {
 								key={i}
 								borderWidth={2}
 								borderRadius={"md"}
-								py={2.5}
+								py={2}
 								pl={4}
 								boxShadow={shadow}
 								_hover={{ boxShadow: "outline" }}
