@@ -91,7 +91,7 @@ export default function SearchBarAuto({ suggestions, ...props }) {
 	}
 
 	function handleKeyDown(e) {
-		if (e.key === "Enter" || e.key === "Tab") handleEnterKey(e);
+		if (e.key === "Enter") handleEnterKey(e);
 
 		// Return if no suggestions are visible
 		if (!filteredSuggestions) return;
