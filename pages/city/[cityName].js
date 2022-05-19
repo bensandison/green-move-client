@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useRouter } from "next/router";
+import Head from 'next/head';
 import { useEffect, useState } from "react";
 import {
 	Flex,
@@ -19,9 +19,7 @@ import PropertyCard from "../../components/propertyCard";
 import QualityCard from "../../components/qualityCard";
 import Mapbox from "../../components/map.js";
 import MultiLeafScore from "../../components/multiLeafScore";
-import greenMoveLogo from "../../public/green-move-logo.svg";
 import Property from "../../components/property";
-import Image from "next/image";
 import SearchBarAuto from "../../components/searchBarAuto";
 
 export async function getStaticPaths() {
@@ -124,7 +122,7 @@ export default function CityData({
 	rightmoveProperties,
 	cityNames,
 }) {
-	const router = useRouter();
+
 
 	// If theres an error with properties:
 	let propertyListings = <Text>Null</Text>;
@@ -148,22 +146,9 @@ export default function CityData({
 
 	return (
 		<Flex gap={4} maxW="container.md" direction="column" py={4} m="auto">
-			<Box
-				as="button"
-				mr="auto"
-				onClick={(e) => {
-					e.preventDefault();
-					router.push("/");
-				}}
-			>
-				<Image
-					src={greenMoveLogo}
-					alt="leaf-logo"
-					height="25"
-					width="180"
-				></Image>
-			</Box>
-
+			<Head>
+				<title>GreenMove.io - {`${cityData.name}, ${cityData.county}, ${cityData.country}`}</title>
+			</Head>
 			<Box mb={4}>
 				<SearchBarAuto suggestions={cityNames}></SearchBarAuto>
 				{!cityData && (
@@ -333,14 +318,16 @@ export default function CityData({
 							/>
 						</SimpleGrid>
 					</Box>
-					<Box>
-						<Heading as="h2" size="md" mb={4} color="blackAlpha.800">
-							Property Listings
-						</Heading>
-						<SimpleGrid mt="2" columns={[1, 2, 3]} spacing={4}>
-							{propertyListings}
-						</SimpleGrid>
-					</Box>
+					{propertyListings.length >= 1 &&
+						<Box>
+							<Heading as="h2" size="md" mb={4} color="blackAlpha.800">
+								Property Listings
+							</Heading>
+							<SimpleGrid mt="2" columns={[1, 2, 3]} spacing={4}>
+								{propertyListings}
+							</SimpleGrid>
+						</Box>
+					}
 				</>
 			)}
 		</Flex>
