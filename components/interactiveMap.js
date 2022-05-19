@@ -62,32 +62,29 @@ export default function InteractiveMap({
 
     map.current.on("load", () => {
       // Add an image to use as a custom marker
-      map.current.loadImage(
-        "/small-green-location-icon-png.png",
-        (error, image) => {
-          if (error) throw error;
-          map.current.addImage("custom-marker", image);
-          // Add a GeoJSON source with 2 points
-          map.current.addSource("points", {
-            type: "geojson",
-            data: geojson,
-          });
+      map.current.loadImage("/location-icon.png", (error, image) => {
+        if (error) throw error;
+        map.current.addImage("custom-marker", image);
+        // Add a GeoJSON source with 2 points
+        map.current.addSource("points", {
+          type: "geojson",
+          data: geojson,
+        });
 
-          // Add a symbol layer
-          map.current.addLayer({
-            id: "points",
-            type: "symbol",
-            source: "points",
-            layout: {
-              "icon-image": "custom-marker",
-              "text-field": ["get", "title"],
-              "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-              "text-offset": [0, 0.8],
-              "text-anchor": "top",
-            },
-          });
-        }
-      );
+        // Add a symbol layer
+        map.current.addLayer({
+          id: "points",
+          type: "symbol",
+          source: "points",
+          layout: {
+            "icon-image": "custom-marker",
+            "text-field": ["get", "title"],
+            "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+            "text-offset": [0, 0.8],
+            "text-anchor": "top",
+          },
+        });
+      });
     });
 
     // Center the map on the coordinates of the icon click
