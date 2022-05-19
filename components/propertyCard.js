@@ -7,7 +7,7 @@ export default function PropertyCard({ emojiSymbol, emojiLabel, title, value }) 
 			<Text fontSize="lg" fontWeight="semibold" mb={2}>
 				{title}
 			</Text>
-			<Box fontSize="3xl">
+			<Box fontSize="2xl">
 				{emojiSymbol !== undefined &&
 					<Emoji symbol={emojiSymbol} label={emojiLabel} />
 				}
