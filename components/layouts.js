@@ -12,7 +12,6 @@ export default function Layout({ children }) {
 	return (
 		<>
 			<Head>
-				// SEO
 				<title>GreenMove.io - LIVE GREEN. MOVE GREEN.</title>
 				<meta name="description" content="Providing location based enviromental ratings. Helping you find the greenest place to live." />
 
