@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Text, Button } from "@chakra-ui/react";
 import InteractiveMap from "../components/interactiveMap";
 import { MapProvider } from "../components/mapContext";
 import CityData from "./city/[cityName]";
+import { useRouter } from "next/router";
 
 export async function getStaticProps() {
   //get data for all cities
@@ -15,20 +16,42 @@ export async function getStaticProps() {
 }
 
 export default function MapPage({ allPlaces }) {
+  const router = useRouter();
   return (
-    <MapProvider>
-      <Box position="relative">
-        <InteractiveMap
-          longitude={-3}
-          latitude={53.7}
-          startingZoom={10}
-          showAll={true}
-          allPlaces={allPlaces}
-        ></InteractiveMap>
-        <Box position="absolute" bottom={0} right={0} p={1} backgroundColor="whiteAlpha.800">
-          <Text>&copy; 2022 GreenMove.io</Text>
+    <>
+      <Button
+        position="absolute"
+        zIndex="99"
+        top="20px"
+        left="20px"
+        borderColor="gray"
+        borderWidth="1px"
+        onClick={() => {
+          router.push("/");
+        }}
+      >
+        Back
+      </Button>
+      <MapProvider>
+        <Box position="relative">
+          <InteractiveMap
+            longitude={-3}
+            latitude={53.7}
+            startingZoom={5}
+            showAll={true}
+            allPlaces={allPlaces}
+          ></InteractiveMap>
+          <Box
+            position="absolute"
+            bottom={0}
+            right={0}
+            p={1}
+            backgroundColor="whiteAlpha.800"
+          >
+            <Text>&copy; 2022 GreenMove.io</Text>
+          </Box>
         </Box>
-      </Box>
-    </MapProvider>
+      </MapProvider>
+    </>
   );
 }
