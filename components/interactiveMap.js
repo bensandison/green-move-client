@@ -70,7 +70,7 @@ export default function InteractiveMap({
 
       map.on("load", () => {
         // Add an image to use as a custom marker
-        map.loadImage("/location-icon.png", (error, image) => {
+        map.loadImage("/small-location-icon-png.png", (error, image) => {
           if (error) throw error;
           map.addImage("custom-marker", image);
           // Add a GeoJSON source with 2 points
@@ -86,19 +86,34 @@ export default function InteractiveMap({
             source: "points",
             layout: {
               "icon-image": "custom-marker",
-              "text-field": ["get", "title"],
-              "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-              "text-offset": [0, 0.8],
-              "text-anchor": "top",
+              "icon-size": 0.12,
+              "icon-allow-overlap": true,
+              "icon-anchor": "bottom",
             },
           });
+
+          // Add a symbol layer
+          map.addLayer({
+            id: "points-text",
+            type: "symbol",
+            source: "points",
+            layout: {
+              "text-field": ["get", "title"],
+              "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+              "text-offset": [0, 0],
+              "text-anchor": "top",
+              "icon-allow-overlap": true,
+              "text-allow-overlap": false,
+            },
+          });
+          map.setLayoutProperty("points-text", "visibility", "none");
         });
 
         map.on("click", "points", (e) => {
           map.flyTo({
+            zoom: 10,
             center: e.features[0].geometry.coordinates,
           });
-
           const labels = e.features.map((feature) => (
             <PopupContent
               key={feature.properties.title}
@@ -126,6 +141,16 @@ export default function InteractiveMap({
         // Change it back to a pointer when it leaves.
         map.on("mouseleave", "points", () => {
           map.getCanvas().style.cursor = "";
+        });
+
+        //only show text when zoomed in far enough
+        map.on("zoomend", () => {
+          const layer = map.getLayer("points-text");
+          if (map.getZoom() > 8) {
+            map.setLayoutProperty("points-text", "visibility", "visible");
+          } else {
+            map.setLayoutProperty("points-text", "visibility", "none");
+          }
         });
       });
     };
