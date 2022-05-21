@@ -95,6 +95,10 @@ export default function InteractiveMap({
         });
 
         map.on("click", "points", (e) => {
+          map.flyTo({
+            center: e.features[0].geometry.coordinates,
+          });
+
           const labels = e.features.map((feature) => (
             <PopupContent
               rating={feature.properties.label}
