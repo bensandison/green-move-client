@@ -146,7 +146,7 @@ export default function InteractiveMap({
         //only show text when zoomed in far enough
         map.on("zoomend", () => {
           const layer = map.getLayer("points-text");
-          if (map.getZoom() > 8) {
+          if (map.getZoom() > 7) {
             map.setLayoutProperty("points-text", "visibility", "visible");
           } else {
             map.setLayoutProperty("points-text", "visibility", "none");
