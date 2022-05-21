@@ -101,6 +101,7 @@ export default function InteractiveMap({
 
           const labels = e.features.map((feature) => (
             <PopupContent
+              key={feature.properties.title}
               rating={feature.properties.label}
               label={feature.properties.title}
             />
@@ -140,7 +141,7 @@ export default function InteractiveMap({
           {content}
         </Popup>
       )}
-      <div class="popup" ref={(el) => (mapContainer.current = el)} />
+      <div className="popup" ref={(el) => (mapContainer.current = el)} />
     </>
   );
 }
