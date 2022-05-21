@@ -3,7 +3,7 @@ import mapboxgl from "!mapbox-gl";
 import React, { useRef, useState, useEffect, useContext } from "react";
 import { Box } from "@chakra-ui/react";
 
-import Popup from "./Popup";
+import Popup from "./popup";
 import PopupContent from "./PopupContent";
 import { mapContext } from "./mapContext";
 
@@ -108,7 +108,6 @@ export default function InteractiveMap({
           ));
 
           setContent(labels);
-          console.log("test: " + e.lngLat);
           setPopupLngLat(e.lngLat);
 
           var coordinates = e.features[0].geometry.coordinates.slice();
