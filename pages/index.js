@@ -8,6 +8,7 @@ import {
   AspectRatio,
   Text,
   SimpleGrid,
+  Button,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -92,8 +93,22 @@ export default function Home({ allPlaces, top5Places, cityNames }) {
         </Box>
 
         <Box>
-          <Heading as="h3" fontWeight="semibold" fontSize="2xl" mb={4}>
+          <Heading
+            as="h3"
+            fontWeight="semibold"
+            fontSize="2xl"
+            mb={4}
+            display="flex"
+            justifyContent={"space-between"}
+          >
             Interactive Map
+            <Button
+              onClick={() => {
+                router.push("/map");
+              }}
+            >
+              View Fullscreen
+            </Button>
           </Heading>
           <AspectRatio
             mb={10}
