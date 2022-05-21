@@ -60,10 +60,12 @@ export default function InteractiveMap({
         zoom: startingZoom, // starting zoom
       });
 
+      map.addControl(new mapboxgl.FullscreenControl());
+
       map.on("load", () => {
         setMap(map);
 
-        // map.resize();
+        map.resize();
       });
 
       map.on("load", () => {
@@ -110,6 +112,16 @@ export default function InteractiveMap({
           while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
           }
+        });
+
+        // Change the cursor to a pointer when it enters the icon.
+        map.on("mouseenter", "points", () => {
+          map.getCanvas().style.cursor = "pointer";
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on("mouseleave", "points", () => {
+          map.getCanvas().style.cursor = "";
         });
       });
     };
