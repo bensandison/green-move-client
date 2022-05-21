@@ -12,7 +12,7 @@
 .popup {
   width: 100%;
   min-width: 600px;
-  height: calc(100vh - 80px);
+  height: calc(100vh);
 }
 
 .mapboxgl-popup-close-button {

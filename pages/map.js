@@ -1,8 +1,8 @@
-import InteractiveMap from "../components/interactiveMap";
-
 import { useEffect, useState } from "react";
-import CityData from "./city/[cityName]";
+import { Box, Text } from "@chakra-ui/react";
+import InteractiveMap from "../components/interactiveMap";
 import { MapProvider } from "../components/mapContext";
+import CityData from "./city/[cityName]";
 
 export async function getStaticProps() {
   //get data for all cities
@@ -17,7 +17,7 @@ export async function getStaticProps() {
 export default function MapPage({ allPlaces }) {
   return (
     <MapProvider>
-      <div>
+      <Box position="relative">
         <InteractiveMap
           longitude={-3}
           latitude={53.7}
@@ -25,7 +25,10 @@ export default function MapPage({ allPlaces }) {
           showAll={true}
           allPlaces={allPlaces}
         ></InteractiveMap>
-      </div>
+        <Box position="absolute" bottom={0} right={0} p={1} backgroundColor="whiteAlpha.800">
+          <Text>&copy; 2022 GreenMove.io</Text>
+        </Box>
+      </Box>
     </MapProvider>
   );
 }

@@ -8,6 +8,7 @@ import greenMoveLogo from "../public/green-move-logo.svg";
 // Shared layout between multiple pages:
 export default function Layout({ children }) {
 	const router = useRouter();
+	console.log(router.pathname);
 
 	return (
 		<>
@@ -60,30 +61,34 @@ export default function Layout({ children }) {
 				data-domains="greenmove.io"
 				strategy="afterInteractive"
 			/>
-			<Box maxW="container.md" py={4} m="auto">
-				<Box
-					as="button"
-					onClick={(e) => {
-						e.preventDefault();
-						router.push("/");
-					}}
-				>
-					<Image
-						src={greenMoveLogo}
-						alt="leaf-logo"
-						height="25"
-						width="180"
-					></Image>
+			{router.pathname !== '/map' &&
+				<Box maxW="container.md" py={4} m="auto">
+					<Box
+						as="button"
+						onClick={(e) => {
+							e.preventDefault();
+							router.push("/");
+						}}
+					>
+						<Image
+							src={greenMoveLogo}
+							alt="leaf-logo"
+							height="25"
+							width="180"
+						></Image>
+					</Box>
 				</Box>
-			</Box>
-			<Box px={4} as="main" pb={16}>
+			}
+			<Box px={router.pathname !== '/map' ? 4 : 0} as="main" pb={router.pathname !== '/map' ? 16 : 0}>
 				{children}
 			</Box>
-			<Box position="relative" maxW="container.md" py={4} m="auto">
-				<Box position="absolute" bottom={6} right={6}>
-					<Text>&copy; 2022 GreenMove.io</Text>
+			{router.pathname !== '/map' &&
+				<Box position="relative" maxW="container.md" py={4} m="auto">
+					<Box position="absolute" bottom={6} right={6}>
+						<Text>&copy; 2022 GreenMove.io</Text>
+					</Box>
 				</Box>
-			</Box>
+			}
 		</>
 	);
 }
