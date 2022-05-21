@@ -123,7 +123,7 @@ export default function InteractiveMap({
           ));
 
           setContent(labels);
-          setPopupLngLat(e.lngLat);
+          setPopupLngLat(e.features[0].geometry.coordinates);
 
           var coordinates = e.features[0].geometry.coordinates.slice();
           var description = e.features[0].properties.description;
