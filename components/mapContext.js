@@ -18,7 +18,6 @@ function MapProvider({ children }) {
   const [lngLat, setLngLat] = useState({ lng: null, lat: null });
 
   function goToCity(city) {
-    console.log(city);
     router.push(`/city/${city.label.toLowerCase()}`);
   }
 
