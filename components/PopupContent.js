@@ -21,11 +21,11 @@ export default function PopupContent({ label, rating }) {
   return (
     <Box>
       <Heading size="md">{label}</Heading>
-      <Stack mt={3} direction="row" spacing={1}>
+      <Stack mt="2" direction="row" spacing={1}>
         <MultiLeafScore score={rating}></MultiLeafScore>
       </Stack>
 
-      <Button mt="3" size="md" onClick={() => goToCity({ label })}>
+      <Button mt="3" size="sm" onClick={() => goToCity({ label })}>
         Find Out More
         <ArrowForwardIcon w="6" h="6" ml="2" />
       </Button>

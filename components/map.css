@@ -19,3 +19,7 @@
   padding-right: 5px;
   font-size: large;
 }
+
+.popup svg {
+  height: 25px;
+}
