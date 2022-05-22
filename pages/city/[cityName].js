@@ -243,7 +243,7 @@ export default function CityData({
 							/>
 							<QualityCard
 								title="Park average area"
-								value={`${cityData.park_average_area}km\u00B2`}
+								value={`${cityData.park_average_area} km\u00B2`}
 								percent={cityData.percentages.park_average_area}
 							/>
 							<QualityCard
@@ -272,25 +272,25 @@ export default function CityData({
 								emojiSymbol="📏"
 								emojiLabel="Straight Ruler"
 								title="Area"
-								value={`${cityData.area}km\u00B2`}
+								value={`${cityData.area} km\u00B2`}
 							/>
 							<PropertyCard
 								emojiSymbol="🌳"
 								emojiLabel="Deciduous Tree"
 								title="Greenspace Area"
-								value={`${cityData.greenspace_area}km\u00B2`}
+								value={`${cityData.greenspace_area} km\u00B2`}
 							/>
 							<PropertyCard
 								emojiSymbol="🥾"
 								emojiLabel="Hiking Boot"
 								title="Walking routes"
-								value={`${cityData.walking_routes_length}km`}
+								value={`${cityData.walking_routes_length} km`}
 							/>
 							<PropertyCard
 								emojiSymbol="🚴"
 								emojiLabel="Person Biking"
 								title="Cycling routes"
-								value={`${cityData.cycling_routes_length}km`}
+								value={`${cityData.cycling_routes_length} km`}
 							/>
 							<PropertyCard
 								emojiSymbol="🧍"

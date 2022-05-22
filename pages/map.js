@@ -18,40 +18,42 @@ export async function getStaticProps() {
 export default function MapPage({ allPlaces }) {
   const router = useRouter();
   return (
-    <>
-      <Button
+    <Box position="relative" width="100%">
+      <Box
         position="absolute"
-        zIndex="99"
-        top="20px"
-        left="20px"
-        borderColor="gray"
-        borderWidth="1px"
-        onClick={() => {
-          router.push("/");
-        }}
+        zIndex={99}
+        top={4}
+        left={4}
       >
-        Back
-      </Button>
+        <Button
+
+          borderColor="gray"
+          borderWidth={1}
+          onClick={() => {
+            router.push("/");
+          }}
+        >
+          Back
+        </Button>
+      </Box>
       <MapProvider>
-        <Box position="relative">
-          <InteractiveMap
-            longitude={-3}
-            latitude={53.7}
-            startingZoom={5}
-            showAll={true}
-            allPlaces={allPlaces}
-          ></InteractiveMap>
-          <Box
-            position="absolute"
-            bottom={0}
-            right={0}
-            p={1}
-            backgroundColor="whiteAlpha.800"
-          >
-            <Text>&copy; 2022 GreenMove.io</Text>
-          </Box>
-        </Box>
+        <InteractiveMap
+          longitude={-3}
+          latitude={53.7}
+          startingZoom={5}
+          showAll={true}
+          allPlaces={allPlaces}
+        ></InteractiveMap>
       </MapProvider>
-    </>
+      <Box
+        position="absolute"
+        bottom={0}
+        right={0}
+        p={1}
+        backgroundColor="whiteAlpha.800"
+      >
+        <Text>&copy; 2022 GreenMove.io</Text>
+      </Box>
+    </Box>
   );
 }

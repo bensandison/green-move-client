@@ -70,7 +70,7 @@ export default function InteractiveMap({
 
       map.on("load", () => {
         // Add an image to use as a custom marker
-        map.loadImage("/small-location-icon-png.png", (error, image) => {
+        map.loadImage("/location-icon.png", (error, image) => {
           if (error) throw error;
           map.addImage("custom-marker", image);
           // Add a GeoJSON source with 2 points

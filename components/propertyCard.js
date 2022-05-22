@@ -11,7 +11,7 @@ export default function PropertyCard({ emojiSymbol, emojiLabel, title, value }) 
 				{emojiSymbol !== undefined &&
 					<Emoji symbol={emojiSymbol} label={emojiLabel} />
 				}
-				<Text fontWeight="semibold" display="inline-block" ml={1}>
+				<Text fontWeight="semibold" display="inline-block" ml={[2,1,1]}>
 					{value !== null ? value : 'N/A'}
 				</Text>
 			</Box>
