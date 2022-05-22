@@ -8,7 +8,6 @@ import greenMoveLogo from "../public/green-move-logo.svg";
 // Shared layout between multiple pages:
 export default function Layout({ children }) {
 	const router = useRouter();
-	console.log(router.pathname);
 
 	return (
 		<>
@@ -62,7 +61,7 @@ export default function Layout({ children }) {
 				strategy="afterInteractive"
 			/>
 			{router.pathname !== '/map' &&
-				<Box maxW="container.md" py={4} m="auto">
+				<Box maxW="container.md" py={4} px={[4, 4, 0]} m="auto">
 					<Box
 						as="button"
 						onClick={(e) => {
