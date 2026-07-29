@@ -1,17 +1,11 @@
 # GreenMove.io
 
-## To run the dev server:
+## Live Green. Move Green.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Providing environmental ratings for every city in the uk. Based off live data from public API's. Built as a group project for our final year of uni.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Hosted at: [https://resonant-strudel-1c638f.netlify.app/](https://resonant-strudel-1c638f.netlify.app/)
 
-## To change site:
+Backend Repo: [https://github.com/hayhaydz/greenmove-backend](https://github.com/hayhaydz/greenmove-backend)
 
-Push all changes to dev branch and merge into main when ready for production
-
-Main branch is automatically hosted on Netlify
+<img width="801" height="654" alt="image" src="https://github.com/user-attachments/assets/af066ae0-93fc-48a9-b0dd-0db0223c0201" />
