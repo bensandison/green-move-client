@@ -2,7 +2,9 @@
 
 ## Live Green. Move Green.
 
-Providing environmental ratings for every city in the uk. Based off live data from public API's. Built as a group project for our final year of uni.
+Providing environmental ratings for every city in the uk. Based off live data from public API's. 
+
+Built as a group project for our final year of uni (2022).
 
 Hosted at: [https://resonant-strudel-1c638f.netlify.app/](https://resonant-strudel-1c638f.netlify.app/)
 
