@@ -1,13 +1,15 @@
 # GreenMove.io
 
-## Live Green. Move Green.
+<img width="795" height="172" alt="image" src="https://github.com/user-attachments/assets/6cbd8fe5-8bb3-4c9b-9830-fe956faa7202" />
 
-Providing environmental ratings for every city in the uk. Based off live data from public API's. 
+### Live Green. Move Green.
+
+**Providing environmental ratings for every city in the uk. Based off live data from public API's.** 
 
 Built as a group project for our final year of uni (2022).
 
-Hosted at: [https://resonant-strudel-1c638f.netlify.app/](https://resonant-strudel-1c638f.netlify.app/)
+**Hosted at:** [https://resonant-strudel-1c638f.netlify.app/](https://resonant-strudel-1c638f.netlify.app/)
 
-Backend Repo: [https://github.com/hayhaydz/greenmove-backend](https://github.com/hayhaydz/greenmove-backend)
+**Backend Repo:** [https://github.com/hayhaydz/greenmove-backend](https://github.com/hayhaydz/greenmove-backend)
 
-<img width="801" height="654" alt="image" src="https://github.com/user-attachments/assets/af066ae0-93fc-48a9-b0dd-0db0223c0201" />
+<img width="811" height="657" alt="image" src="https://github.com/user-attachments/assets/ef381362-3d49-4b84-84c2-2315fab37d22" />
